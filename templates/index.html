@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>artisJet — Soporte Técnico</title>
+    <title>Bomedia — Soporte Técnico</title>
     <style>
         :root {
             --primary: #1a56db;
@@ -420,10 +420,10 @@
     <!-- Header -->
     <div class="header">
         <div class="header-left">
-            <div class="logo">AJ</div>
+            <div class="logo">BM</div>
             <div>
-                <h1>artisJet Soporte Técnico</h1>
-                <p>Asistente de impresoras UV</p>
+                <h1>Bomedia Soporte Técnico</h1>
+                <p>Asistente de impresoras UV — artisJet &amp; MBO</p>
             </div>
         </div>
         <button class="btn-new-chat" onclick="newChat()">+ Nueva consulta</button>
@@ -433,8 +433,8 @@
     <div class="chat-container" id="chatContainer">
         <div class="welcome" id="welcomeScreen">
             <div class="welcome-icon">🖨️</div>
-            <h2>Soporte Técnico artisJet</h2>
-            <p>Pregunta sobre instalación, mantenimiento, errores, impresión o software de tu impresora UV artisJet.</p>
+            <h2>Soporte Técnico Bomedia</h2>
+            <p>Pregunta sobre instalación, mantenimiento, errores, impresión o software de tu impresora UV (artisJet o MBO).</p>
             <div class="suggestions">
                 <div class="suggestion" onclick="sendSuggestion(this)">Mi impresora muestra error SX001, ¿cómo lo soluciono?</div>
                 <div class="suggestion" onclick="sendSuggestion(this)">¿Cuál es el mantenimiento semanal recomendado?</div>
@@ -463,7 +463,7 @@
             </button>
         </div>
         <div class="footer-note">
-            artisJet Technical Support — Las respuestas se basan en documentación oficial
+            Bomedia Technical Support — Las respuestas se basan en documentación oficial de artisJet y MBO
         </div>
     </div>
 
@@ -708,13 +708,13 @@
             chatContainer.innerHTML = `
                 <div class="welcome" id="welcomeScreen">
                     <div class="welcome-icon">🖨️</div>
-                    <h2>Soporte Técnico artisJet</h2>
-                    <p>Pregunta sobre instalación, mantenimiento, errores, impresión o software de tu impresora UV artisJet.</p>
+                    <h2>Soporte Técnico Bomedia</h2>
+                    <p>Pregunta sobre instalación, mantenimiento, errores, impresión o software de tu impresora UV (artisJet o MBO).</p>
                     <div class="suggestions">
                         <div class="suggestion" onclick="sendSuggestion(this)">Mi impresora muestra error SX001, ¿cómo lo soluciono?</div>
                         <div class="suggestion" onclick="sendSuggestion(this)">¿Cuál es el mantenimiento semanal recomendado?</div>
                         <div class="suggestion" onclick="sendSuggestion(this)">El resultado de impresión tiene líneas, ¿qué puede ser?</div>
-                        <div class="suggestion" onclick="sendSuggestion(this)">¿Cómo cambio los dampers en una Proud?</div>
+                        <div class="suggestion" onclick="sendSuggestion(this)">Tengo una MBO 4060, ¿cómo ajusto la impresión bidireccional?</div>
                     </div>
                 </div>`;
             messageInput.focus();
