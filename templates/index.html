@@ -248,6 +248,57 @@
             color: inherit;
         }
 
+        /* Video links */
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #eef2ff;
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            margin: 4px 0;
+            border: 1px solid #c7d2fe;
+            transition: all 0.2s;
+        }
+        .video-link:hover {
+            background: #dbeafe;
+            border-color: var(--primary);
+        }
+        .video-link::before {
+            content: '▶';
+            font-size: 11px;
+        }
+
+        /* Follow-up suggestions */
+        .follow-ups {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+        }
+        .follow-up-btn {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid #c7d2fe;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            line-height: 1.4;
+        }
+        .follow-up-btn:hover {
+            background: #dbeafe;
+            border-color: var(--primary);
+        }
+
         /* Typing indicator */
         .typing {
             display: flex;
@@ -425,7 +476,7 @@
             sendMessage();
         }
 
-        function addMessage(text, role) {
+        function addMessage(text, role, followUps) {
             if (welcomeScreen) {
                 welcomeScreen.remove();
             }
@@ -442,6 +493,23 @@
 
             if (role === 'bot') {
                 content.innerHTML = formatMarkdown(text);
+
+                // Add follow-up suggestions
+                if (followUps && followUps.length > 0) {
+                    const fuContainer = document.createElement('div');
+                    fuContainer.className = 'follow-ups';
+                    followUps.forEach(q => {
+                        const btn = document.createElement('button');
+                        btn.className = 'follow-up-btn';
+                        btn.textContent = q;
+                        btn.onclick = function() {
+                            messageInput.value = q;
+                            sendMessage();
+                        };
+                        fuContainer.appendChild(btn);
+                    });
+                    content.appendChild(fuContainer);
+                }
             } else {
                 content.textContent = text;
             }
@@ -498,6 +566,27 @@
                 .replace(/^## (.+)$/gm, '<strong>$1</strong>')
                 .replace(/^# (.+)$/gm, '<strong>$1</strong>');
 
+            // Markdown links [text](url) → clickable links
+            html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, function(match, linkText, url) {
+                if (url.includes('drive.google.com')) {
+                    return '<a href="' + url + '" target="_blank" rel="noopener" class="video-link">' + linkText + '</a>';
+                }
+                return '<a href="' + url + '" target="_blank" rel="noopener" style="color:var(--primary)">' + linkText + '</a>';
+            });
+
+            // Plain Drive URLs (not already in a link) → video link buttons
+            html = html.replace(/(?<!href=")(https:\/\/drive\.google\.com\/file\/d\/[^\s\)]+)/g, function(url) {
+                return '<a href="' + url + '" target="_blank" rel="noopener" class="video-link">Ver video tutorial</a>';
+            });
+
+            // Plain URLs (not already in a link)
+            html = html.replace(/(?<!href=")(https?:\/\/(?!drive\.google\.com)[^\s<\)]+)/g, function(url) {
+                return '<a href="' + url + '" target="_blank" rel="noopener" style="color:var(--primary)">' + url + '</a>';
+            });
+
+            // Clean up video emoji + text before link (the assistant often writes "📹 Video tutorial disponible: [link]")
+            html = html.replace(/📹\s*Video tutorial disponible:\s*/gi, '');
+
             // Numbered lists
             html = html.replace(/((?:^\d+\..+\n?)+)/gm, function(match) {
                 const items = match.trim().split('\n')
@@ -549,7 +638,7 @@
                 if (data.error) {
                     addMessage('⚠️ ' + data.error, 'bot');
                 } else {
-                    addMessage(data.response, 'bot');
+                    addMessage(data.response, 'bot', data.follow_ups || []);
                 }
             } catch (err) {
                 removeTypingIndicator();
