@@ -248,21 +248,23 @@
             color: inherit;
         }
 
-        /* Video links */
-        .video-link {
+        /* Resource links (Video & PDF) */
+        .resource-link {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: #eef2ff;
-            color: var(--primary);
             padding: 6px 12px;
             border-radius: 8px;
             text-decoration: none;
             font-size: 13px;
             font-weight: 500;
             margin: 4px 0;
-            border: 1px solid #c7d2fe;
             transition: all 0.2s;
+        }
+        .video-link {
+            background: #eef2ff;
+            color: var(--primary);
+            border: 1px solid #c7d2fe;
         }
         .video-link:hover {
             background: #dbeafe;
@@ -270,6 +272,19 @@
         }
         .video-link::before {
             content: '▶';
+            font-size: 11px;
+        }
+        .pdf-link {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fca5a5;
+        }
+        .pdf-link:hover {
+            background: #fee2e2;
+            border-color: #b91c1c;
+        }
+        .pdf-link::before {
+            content: '📄';
             font-size: 11px;
         }
 
@@ -566,17 +581,26 @@
                 .replace(/^## (.+)$/gm, '<strong>$1</strong>')
                 .replace(/^# (.+)$/gm, '<strong>$1</strong>');
 
-            // Markdown links [text](url) → clickable links
+            // Markdown links [text](url) → clickable links with Video/PDF styling
             html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, function(match, linkText, url) {
-                if (url.includes('drive.google.com')) {
-                    return '<a href="' + url + '" target="_blank" rel="noopener" class="video-link">' + linkText + '</a>';
+                // Detect Video or PDF prefix
+                if (linkText.match(/^Video\s*-\s*/i)) {
+                    return '<a href="' + url + '" target="_blank" rel="noopener" class="resource-link video-link">' + linkText + '</a>';
                 }
+                if (linkText.match(/^PDF\s*-\s*/i)) {
+                    return '<a href="' + url + '" target="_blank" rel="noopener" class="resource-link pdf-link">' + linkText + '</a>';
+                }
+                // Drive URLs without prefix → default to video style
+                if (url.includes('drive.google.com')) {
+                    return '<a href="' + url + '" target="_blank" rel="noopener" class="resource-link video-link">' + linkText + '</a>';
+                }
+                // Bomedia support link or other
                 return '<a href="' + url + '" target="_blank" rel="noopener" style="color:var(--primary)">' + linkText + '</a>';
             });
 
             // Plain Drive URLs (not already in a link) → video link buttons
             html = html.replace(/(?<!href=")(https:\/\/drive\.google\.com\/file\/d\/[^\s\)]+)/g, function(url) {
-                return '<a href="' + url + '" target="_blank" rel="noopener" class="video-link">Ver video tutorial</a>';
+                return '<a href="' + url + '" target="_blank" rel="noopener" class="resource-link video-link">Video - Ver tutorial</a>';
             });
 
             // Plain URLs (not already in a link)
@@ -584,8 +608,9 @@
                 return '<a href="' + url + '" target="_blank" rel="noopener" style="color:var(--primary)">' + url + '</a>';
             });
 
-            // Clean up video emoji + text before link (the assistant often writes "📹 Video tutorial disponible: [link]")
-            html = html.replace(/📹\s*Video tutorial disponible:\s*/gi, '');
+            // Clean up emoji prefixes before links (assistant sometimes adds these)
+            html = html.replace(/📹\s*(Video tutorial disponible:?\s*)?/gi, '');
+            html = html.replace(/📄\s*(Documento completo:?\s*)?/gi, '');
 
             // Numbered lists
             html = html.replace(/((?:^\d+\..+\n?)+)/gm, function(match) {
