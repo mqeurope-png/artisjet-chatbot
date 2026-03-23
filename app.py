@@ -104,6 +104,7 @@ def chat():
 
     data = request.json
     user_message = data.get("message", "").strip()
+    client_thread_id = data.get("thread_id")  # Thread ID from frontend
 
     if not user_message:
         return jsonify({"error": "Mensaje vacío"}), 400
@@ -117,7 +118,16 @@ def chat():
         }), 500
 
     try:
-        thread_id = get_or_create_thread()
+        # Use thread_id from frontend if provided, otherwise create/get from session
+        if client_thread_id:
+            try:
+                client.beta.threads.retrieve(client_thread_id)
+                thread_id = client_thread_id
+                session["thread_id"] = thread_id
+            except Exception:
+                thread_id = get_or_create_thread()
+        else:
+            thread_id = get_or_create_thread()
 
         # Enviar mensaje del usuario
         client.beta.threads.messages.create(
