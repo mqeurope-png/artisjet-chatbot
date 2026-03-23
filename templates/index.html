@@ -636,6 +636,9 @@
             return html;
         }
 
+        // Thread ID persistence — keeps conversation context so the bot remembers the printer model
+        let currentThreadId = null;
+
         async function sendMessage() {
             if (isWaiting) return;
 
@@ -651,11 +654,23 @@
             addTypingIndicator();
 
             try {
+                // Build payload with thread_id for conversation continuity
+                const payload = { message: text };
+                if (currentThreadId) {
+                    payload.thread_id = currentThreadId;
+                }
+
+                // Use AbortController for 120s timeout (Render cold start can be slow)
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 120000);
+
                 const res = await fetch('/api/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: text })
+                    body: JSON.stringify(payload),
+                    signal: controller.signal
                 });
+                clearTimeout(timeoutId);
 
                 const data = await res.json();
                 removeTypingIndicator();
@@ -663,11 +678,19 @@
                 if (data.error) {
                     addMessage('⚠️ ' + data.error, 'bot');
                 } else {
+                    // Save thread_id for next messages in this conversation
+                    if (data.thread_id) {
+                        currentThreadId = data.thread_id;
+                    }
                     addMessage(data.response, 'bot', data.follow_ups || []);
                 }
             } catch (err) {
                 removeTypingIndicator();
-                addMessage('⚠️ Error de conexión. Intenta de nuevo.', 'bot');
+                if (err.name === 'AbortError') {
+                    addMessage('⚠️ La respuesta tardó demasiado. Intenta de nuevo.', 'bot');
+                } else {
+                    addMessage('⚠️ Error de conexión. Intenta de nuevo.', 'bot');
+                }
             }
 
             sendBtn.disabled = false;
@@ -676,6 +699,8 @@
         }
 
         async function newChat() {
+            // Reset thread so next conversation starts fresh
+            currentThreadId = null;
             try {
                 await fetch('/api/new-chat', { method: 'POST' });
             } catch (e) {}
