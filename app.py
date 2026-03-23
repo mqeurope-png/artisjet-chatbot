@@ -187,6 +187,10 @@ def chat():
                                 if hasattr(ann, 'file_citation'):
                                     sources.append(ann.file_citation.file_id)
 
+                        # Clean up any remaining citation artifacts
+                        import re
+                        text = re.sub(r'【[^】]*】', '', text)  # Remove 【...】 citations
+                        text = re.sub(r'\s+([.,;:!?])', r'\1', text)  # Fix spacing before punctuation
                         response_text = text.strip()
                 break
 
