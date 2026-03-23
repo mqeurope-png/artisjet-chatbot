@@ -61,6 +61,37 @@ def index():
     return render_template("index.html")
 
 
+def generate_follow_ups(thread_id, user_question, assistant_response):
+    """Genera 2-3 preguntas de seguimiento contextualmente relevantes."""
+    try:
+        completion = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "Eres un generador de preguntas de seguimiento para un chatbot de soporte técnico de impresoras UV artisJet. "
+                        "Dada la pregunta del usuario y la respuesta del asistente, genera exactamente 3 preguntas cortas de seguimiento "
+                        "que el usuario podría querer hacer a continuación. Las preguntas deben ser relevantes al contexto, "
+                        "prácticas y en el MISMO IDIOMA que la pregunta original. "
+                        "Responde SOLO con las 3 preguntas, una por línea, sin numeración ni viñetas."
+                    )
+                },
+                {
+                    "role": "user",
+                    "content": f"Pregunta del usuario: {user_question}\n\nRespuesta del asistente (resumen): {assistant_response[:500]}"
+                }
+            ],
+            max_tokens=200,
+            temperature=0.7
+        )
+        raw = completion.choices[0].message.content.strip()
+        suggestions = [line.strip() for line in raw.split("\n") if line.strip()]
+        return suggestions[:3]
+    except Exception:
+        return []
+
+
 @app.route("/api/chat", methods=["POST"])
 def chat():
     """Endpoint de chat — envía mensaje y recibe respuesta del asistente."""
@@ -149,10 +180,14 @@ def chat():
                         response_text = text.strip()
                 break
 
+        # Generar sugerencias de seguimiento basadas en el contexto
+        follow_ups = generate_follow_ups(thread_id, user_message, response_text)
+
         return jsonify({
             "response": response_text,
             "sources": sources,
-            "thread_id": thread_id
+            "thread_id": thread_id,
+            "follow_ups": follow_ups
         })
 
     except Exception as e:
