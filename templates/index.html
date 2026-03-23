@@ -88,6 +88,47 @@
             background: #d4e0f7;
         }
 
+        /* Language selector */
+        .lang-selector {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-light);
+            line-height: 1;
+        }
+
+        .lang-btn:hover {
+            background: var(--white);
+            color: var(--text);
+        }
+
+        .lang-btn.active {
+            background: var(--white);
+            color: var(--primary);
+            font-weight: 600;
+            box-shadow: var(--shadow);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         /* Chat area */
         .chat-container {
             flex: 1;
@@ -426,7 +467,15 @@
                 <p>Asistente de impresoras UV — artisJet &amp; MBO</p>
             </div>
         </div>
-        <button class="btn-new-chat" onclick="newChat()">+ Nueva consulta</button>
+        <div class="header-right">
+            <div class="lang-selector">
+                <button class="lang-btn active" onclick="setLang('es', this)" title="Español">ES</button>
+                <button class="lang-btn" onclick="setLang('en', this)" title="English">EN</button>
+                <button class="lang-btn" onclick="setLang('fr', this)" title="Français">FR</button>
+                <button class="lang-btn" onclick="setLang('de', this)" title="Deutsch">DE</button>
+            </div>
+            <button class="btn-new-chat" onclick="newChat()">+ Nueva consulta</button>
+        </div>
     </div>
 
     <!-- Chat -->
@@ -473,6 +522,31 @@
         const sendBtn = document.getElementById('sendBtn');
         const welcomeScreen = document.getElementById('welcomeScreen');
         let isWaiting = false;
+        let selectedLang = 'es';
+
+        const langLabels = {
+            es: { title: 'Soporte Técnico Bomedia', subtitle: 'Pregunta sobre instalación, mantenimiento, errores, impresión o software de tu impresora UV (artisJet o MBO).', placeholder: 'Escribe tu consulta técnica...', newChat: '+ Nueva consulta', footer: 'Bomedia Technical Support — Las respuestas se basan en documentación oficial de artisJet y MBO' },
+            en: { title: 'Bomedia Technical Support', subtitle: 'Ask about installation, maintenance, errors, printing or software for your UV printer (artisJet or MBO).', placeholder: 'Type your technical question...', newChat: '+ New chat', footer: 'Bomedia Technical Support — Answers are based on official artisJet and MBO documentation' },
+            fr: { title: 'Support Technique Bomedia', subtitle: 'Posez vos questions sur l\'installation, la maintenance, les erreurs, l\'impression ou le logiciel de votre imprimante UV (artisJet ou MBO).', placeholder: 'Écrivez votre question technique...', newChat: '+ Nouvelle consultation', footer: 'Bomedia Support Technique — Les réponses sont basées sur la documentation officielle artisJet et MBO' },
+            de: { title: 'Bomedia Technischer Support', subtitle: 'Fragen zu Installation, Wartung, Fehlern, Druck oder Software Ihres UV-Druckers (artisJet oder MBO).', placeholder: 'Schreiben Sie Ihre technische Frage...', newChat: '+ Neue Anfrage', footer: 'Bomedia Technischer Support — Die Antworten basieren auf offizieller artisJet- und MBO-Dokumentation' }
+        };
+
+        function setLang(lang, btn) {
+            selectedLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const labels = langLabels[lang];
+            messageInput.placeholder = labels.placeholder;
+            document.querySelector('.btn-new-chat').textContent = labels.newChat;
+            document.querySelector('.footer-note').textContent = labels.footer;
+
+            const welcomeEl = document.getElementById('welcomeScreen');
+            if (welcomeEl) {
+                welcomeEl.querySelector('h2').textContent = labels.title;
+                welcomeEl.querySelector('p').textContent = labels.subtitle;
+            }
+        }
 
         function autoResize(textarea) {
             textarea.style.height = 'auto';
@@ -501,7 +575,7 @@
 
             const avatar = document.createElement('div');
             avatar.className = 'message-avatar';
-            avatar.textContent = role === 'bot' ? 'AJ' : '👤';
+            avatar.textContent = role === 'bot' ? 'BM' : '👤';
 
             const content = document.createElement('div');
             content.className = 'message-content';
@@ -544,7 +618,7 @@
 
             const avatar = document.createElement('div');
             avatar.className = 'message-avatar';
-            avatar.textContent = 'AJ';
+            avatar.textContent = 'BM';
 
             const content = document.createElement('div');
             content.className = 'message-content';
@@ -655,7 +729,8 @@
 
             try {
                 // Build payload with thread_id for conversation continuity
-                const payload = { message: text };
+                const langInstruction = selectedLang !== 'es' ? `\n[Responde en ${selectedLang === 'en' ? 'inglés' : selectedLang === 'fr' ? 'francés' : 'alemán'}]` : '';
+                const payload = { message: text + langInstruction };
                 if (currentThreadId) {
                     payload.thread_id = currentThreadId;
                 }
@@ -705,11 +780,12 @@
                 await fetch('/api/new-chat', { method: 'POST' });
             } catch (e) {}
 
+            const labels = langLabels[selectedLang];
             chatContainer.innerHTML = `
                 <div class="welcome" id="welcomeScreen">
                     <div class="welcome-icon">🖨️</div>
-                    <h2>Soporte Técnico Bomedia</h2>
-                    <p>Pregunta sobre instalación, mantenimiento, errores, impresión o software de tu impresora UV (artisJet o MBO).</p>
+                    <h2>${labels.title}</h2>
+                    <p>${labels.subtitle}</p>
                     <div class="suggestions">
                         <div class="suggestion" onclick="sendSuggestion(this)">Mi impresora muestra error SX001, ¿cómo lo soluciono?</div>
                         <div class="suggestion" onclick="sendSuggestion(this)">¿Cuál es el mantenimiento semanal recomendado?</div>
