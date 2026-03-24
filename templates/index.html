@@ -177,31 +177,66 @@
             line-height: 1.5;
         }
 
-        .suggestions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
+        /* Wizard selector */
+        .wizard {
             margin-top: 24px;
-            max-width: 560px;
+            max-width: 500px;
             width: 100%;
         }
-
-        .suggestion {
+        .wizard-step {
+            margin-bottom: 16px;
+            animation: fadeIn 0.3s ease;
+        }
+        .wizard-step-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .wizard-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        .wizard-btn {
             background: var(--white);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
             border-radius: 12px;
-            padding: 12px 16px;
-            font-size: 13px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
             color: var(--text);
             cursor: pointer;
-            text-align: left;
             transition: all 0.2s;
-            line-height: 1.4;
+            line-height: 1.3;
         }
-
-        .suggestion:hover {
+        .wizard-btn:hover {
             border-color: var(--primary);
             background: var(--primary-light);
+            color: var(--primary);
+        }
+        .wizard-btn.selected {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+        .wizard-btn.brand-btn {
+            padding: 14px 28px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .wizard-ready {
+            margin-top: 16px;
+            padding: 10px 16px;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #065f46;
+            animation: fadeIn 0.3s ease;
         }
 
         /* Messages */
@@ -578,7 +613,9 @@
 
         /* Responsive */
         @media (max-width: 640px) {
-            .suggestions { grid-template-columns: 1fr; }
+            .wizard-options { gap: 6px; }
+            .wizard-btn { padding: 8px 14px; font-size: 13px; }
+            .wizard-btn.brand-btn { padding: 10px 20px; font-size: 14px; }
             .message { max-width: 92%; }
             .welcome { padding: 30px 16px; }
             .welcome h2 { font-size: 18px; }
@@ -614,9 +651,9 @@
     <div class="chat-container" id="chatContainer">
         <div class="welcome" id="welcomeScreen">
             <div class="welcome-icon">🖨️</div>
-            <h2>Soporte Técnico Bomedia</h2>
-            <p>Pregunta sobre instalación, mantenimiento, errores, impresión o software de tu impresora UV (artisJet o MBO).</p>
-            <div class="suggestions" id="initialSuggestions"></div>
+            <h2 id="welcomeTitle">Soporte Técnico Bomedia</h2>
+            <p id="welcomeSubtitle"></p>
+            <div class="wizard" id="wizard"></div>
         </div>
     </div>
 
@@ -651,75 +688,58 @@
         let isWaiting = false;
         let selectedLang = 'es';
         let selectedRegion = 'es';
+        let selectedBrand = null;
+        let selectedModel = null;
+
+        // Models per brand
+        const brandModels = {
+            artisJet: ['Young', '3000U Pro', '5000U', '2100U', 'Trust 6090', 'Proud', 'ProV6'],
+            MBO: ['3050', '4060', '4060 Max', '6090', '1015', '1612', '1812', '2513']
+        };
+
+        // Wizard labels per language
+        const wizardLabels = {
+            es: {
+                langStep: 'Selecciona tu idioma',
+                brandStep: 'Selecciona la marca',
+                modelStep: 'Selecciona tu modelo',
+                ready: 'Listo. Escribe tu consulta abajo.',
+                skipModel: 'No estoy seguro / Otro modelo'
+            },
+            en: {
+                langStep: 'Select your language',
+                brandStep: 'Select the brand',
+                modelStep: 'Select your model',
+                ready: 'Ready. Type your question below.',
+                skipModel: 'Not sure / Other model'
+            },
+            fr: {
+                langStep: 'Sélectionnez votre langue',
+                brandStep: 'Sélectionnez la marque',
+                modelStep: 'Sélectionnez votre modèle',
+                ready: 'Prêt. Écrivez votre question ci-dessous.',
+                skipModel: 'Pas sûr / Autre modèle'
+            },
+            de: {
+                langStep: 'Wählen Sie Ihre Sprache',
+                brandStep: 'Wählen Sie die Marke',
+                modelStep: 'Wählen Sie Ihr Modell',
+                ready: 'Bereit. Schreiben Sie Ihre Frage unten.',
+                skipModel: 'Nicht sicher / Anderes Modell'
+            }
+        };
+
+        const langLabels = {
+            es: { title: 'Soporte Técnico Bomedia', subtitle: '', placeholder: 'Escribe tu consulta técnica...', newChat: '+ Nueva consulta', footer: 'Bomedia Technical Support — Las respuestas se basan en documentación oficial de artisJet y MBO' },
+            en: { title: 'Bomedia Technical Support', subtitle: '', placeholder: 'Type your technical question...', newChat: '+ New chat', footer: 'Bomedia Technical Support — Answers are based on official artisJet and MBO documentation' },
+            fr: { title: 'Support Technique Bomedia', subtitle: '', placeholder: 'Écrivez votre question technique...', newChat: '+ Nouvelle consultation', footer: 'Bomedia Support Technique — Les réponses sont basées sur la documentation officielle artisJet et MBO' },
+            de: { title: 'Bomedia Technischer Support', subtitle: '', placeholder: 'Schreiben Sie Ihre technische Frage...', newChat: '+ Neue Anfrage', footer: 'Bomedia Technischer Support — Die Antworten basieren auf offizieller artisJet- und MBO-Dokumentation' }
+        };
 
         function setRegion(region, btn) {
             selectedRegion = region;
             document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-        }
-
-        const langLabels = {
-            es: { title: 'Soporte Técnico Bomedia', subtitle: 'Pregunta sobre instalación, mantenimiento, errores, impresión o software de tu impresora UV (artisJet o MBO).', placeholder: 'Escribe tu consulta técnica...', newChat: '+ Nueva consulta', footer: 'Bomedia Technical Support — Las respuestas se basan en documentación oficial de artisJet y MBO' },
-            en: { title: 'Bomedia Technical Support', subtitle: 'Ask about installation, maintenance, errors, printing or software for your UV printer (artisJet or MBO).', placeholder: 'Type your technical question...', newChat: '+ New chat', footer: 'Bomedia Technical Support — Answers are based on official artisJet and MBO documentation' },
-            fr: { title: 'Support Technique Bomedia', subtitle: 'Posez vos questions sur l\'installation, la maintenance, les erreurs, l\'impression ou le logiciel de votre imprimante UV (artisJet ou MBO).', placeholder: 'Écrivez votre question technique...', newChat: '+ Nouvelle consultation', footer: 'Bomedia Support Technique — Les réponses sont basées sur la documentation officielle artisJet et MBO' },
-            de: { title: 'Bomedia Technischer Support', subtitle: 'Fragen zu Installation, Wartung, Fehlern, Druck oder Software Ihres UV-Druckers (artisJet oder MBO).', placeholder: 'Schreiben Sie Ihre technische Frage...', newChat: '+ Neue Anfrage', footer: 'Bomedia Technischer Support — Die Antworten basieren auf offizieller artisJet- und MBO-Dokumentation' }
-        };
-
-        const starterQuestions = {
-            es: [
-                'Mi impresora muestra error SX001, ¿cómo lo soluciono?',
-                '¿Cuál es el mantenimiento semanal recomendado?',
-                'El resultado de impresión tiene líneas, ¿qué puede ser?',
-                '¿Cómo cambio los dampers en una Proud?',
-                'Tengo una MBO 4060, ¿cómo ajusto la impresión bidireccional?',
-                '¿Cada cuánto hay que cambiar el captop?',
-                '¿Qué tinta debo usar para imprimir sobre vidrio?',
-                '¿Cómo hago una purga de tintas en la 5000U?',
-                '¿Cómo calibro la altura del cabezal?',
-                'Mi impresora no enciende la lámpara UV, ¿qué reviso?'
-            ],
-            en: [
-                'My printer shows error SX001, how do I fix it?',
-                'What is the recommended weekly maintenance?',
-                'Print results have lines, what could it be?',
-                'How do I change the dampers on a Proud?',
-                'I have an MBO 4060, how do I adjust bidirectional printing?',
-                'How often should the captop be replaced?',
-                'Which ink should I use to print on glass?',
-                'How do I purge inks on the 5000U?',
-                'How do I calibrate the printhead height?',
-                'My printer UV lamp won\'t turn on, what should I check?'
-            ],
-            fr: [
-                'Mon imprimante affiche l\'erreur SX001, comment la résoudre ?',
-                'Quel est l\'entretien hebdomadaire recommandé ?',
-                'Le résultat d\'impression a des lignes, quelle en est la cause ?',
-                'Comment changer les dampers sur une Proud ?',
-                'J\'ai une MBO 4060, comment régler l\'impression bidirectionnelle ?',
-                'À quelle fréquence faut-il changer le captop ?',
-                'Quelle encre utiliser pour imprimer sur du verre ?',
-                'Comment faire une purge d\'encre sur la 5000U ?',
-                'Comment calibrer la hauteur de la tête d\'impression ?',
-                'La lampe UV de mon imprimante ne s\'allume pas, que vérifier ?'
-            ],
-            de: [
-                'Mein Drucker zeigt Fehler SX001, wie behebe ich das?',
-                'Was ist die empfohlene wöchentliche Wartung?',
-                'Das Druckergebnis hat Linien, woran kann es liegen?',
-                'Wie wechsle ich die Damper an einer Proud?',
-                'Ich habe einen MBO 4060, wie stelle ich den bidirektionalen Druck ein?',
-                'Wie oft muss der Captop gewechselt werden?',
-                'Welche Tinte sollte ich für Glas verwenden?',
-                'Wie mache ich eine Tintenspülung bei der 5000U?',
-                'Wie kalibriere ich die Druckkopfhöhe?',
-                'Die UV-Lampe meines Druckers geht nicht an, was soll ich prüfen?'
-            ]
-        };
-
-        function getRandomQuestions(lang, count) {
-            const pool = starterQuestions[lang] || starterQuestions['es'];
-            const shuffled = [...pool].sort(() => Math.random() - 0.5);
-            return shuffled.slice(0, count);
         }
 
         function setLang(lang, btn) {
@@ -732,17 +752,96 @@
             document.querySelector('.btn-new-chat').textContent = labels.newChat;
             document.querySelector('.footer-note').textContent = labels.footer;
 
+            // If wizard is visible, rebuild it
             const welcomeEl = document.getElementById('welcomeScreen');
             if (welcomeEl) {
                 welcomeEl.querySelector('h2').textContent = labels.title;
-                welcomeEl.querySelector('p').textContent = labels.subtitle;
-                // Update starter questions in the current language
-                const suggestions = welcomeEl.querySelectorAll('.suggestion');
-                const questions = getRandomQuestions(lang, 4);
-                suggestions.forEach((el, i) => {
-                    if (questions[i]) el.textContent = questions[i];
-                });
+                selectedBrand = null;
+                selectedModel = null;
+                renderWizard();
             }
+        }
+
+        function renderWizard() {
+            const wizard = document.getElementById('wizard');
+            if (!wizard) return;
+            const wl = wizardLabels[selectedLang] || wizardLabels['es'];
+            let html = '';
+
+            // Step 1: Language
+            html += `<div class="wizard-step">
+                <div class="wizard-step-label">${wl.langStep}</div>
+                <div class="wizard-options">
+                    ${['es','en','fr','de'].map(l =>
+                        `<button class="wizard-btn ${selectedLang === l ? 'selected' : ''}"
+                                 onclick="wizardSelectLang('${l}', this)">${
+                            {es:'Español',en:'English',fr:'Français',de:'Deutsch'}[l]
+                        }</button>`
+                    ).join('')}
+                </div>
+            </div>`;
+
+            // Step 2: Brand
+            html += `<div class="wizard-step">
+                <div class="wizard-step-label">${wl.brandStep}</div>
+                <div class="wizard-options">
+                    <button class="wizard-btn brand-btn ${selectedBrand === 'artisJet' ? 'selected' : ''}"
+                            onclick="wizardSelectBrand('artisJet')">artisJet</button>
+                    <button class="wizard-btn brand-btn ${selectedBrand === 'MBO' ? 'selected' : ''}"
+                            onclick="wizardSelectBrand('MBO')">MBO</button>
+                </div>
+            </div>`;
+
+            // Step 3: Model (only if brand selected)
+            if (selectedBrand) {
+                const models = brandModels[selectedBrand] || [];
+                html += `<div class="wizard-step">
+                    <div class="wizard-step-label">${wl.modelStep}</div>
+                    <div class="wizard-options">
+                        ${models.map(m =>
+                            `<button class="wizard-btn ${selectedModel === m ? 'selected' : ''}"
+                                     onclick="wizardSelectModel('${m}')">${m}</button>`
+                        ).join('')}
+                        <button class="wizard-btn ${selectedModel === 'unknown' ? 'selected' : ''}"
+                                onclick="wizardSelectModel('unknown')" style="font-size:12px;color:var(--text-light)">${wl.skipModel}</button>
+                    </div>
+                </div>`;
+            }
+
+            // Ready message
+            if (selectedModel) {
+                const modelDisplay = selectedModel === 'unknown' ? '' : ` ${selectedBrand} ${selectedModel}`;
+                html += `<div class="wizard-ready">${wl.ready}${modelDisplay ? ` (${modelDisplay.trim()})` : ''}</div>`;
+            }
+
+            wizard.innerHTML = html;
+        }
+
+        function wizardSelectLang(lang) {
+            selectedLang = lang;
+            // Sync header lang buttons
+            document.querySelectorAll('.lang-btn').forEach(b => {
+                b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang);
+            });
+            const labels = langLabels[lang];
+            messageInput.placeholder = labels.placeholder;
+            document.querySelector('.btn-new-chat').textContent = labels.newChat;
+            document.querySelector('.footer-note').textContent = labels.footer;
+            const welcomeEl = document.getElementById('welcomeScreen');
+            if (welcomeEl) welcomeEl.querySelector('h2').textContent = labels.title;
+            renderWizard();
+        }
+
+        function wizardSelectBrand(brand) {
+            selectedBrand = brand;
+            selectedModel = null;
+            renderWizard();
+        }
+
+        function wizardSelectModel(model) {
+            selectedModel = model;
+            renderWizard();
+            messageInput.focus();
         }
 
         function autoResize(textarea) {
@@ -755,11 +854,6 @@
                 e.preventDefault();
                 sendMessage();
             }
-        }
-
-        function sendSuggestion(el) {
-            messageInput.value = el.textContent;
-            sendMessage();
         }
 
         function addMessage(text, role, followUps, products) {
@@ -972,7 +1066,9 @@
                 // Build payload with thread_id for conversation continuity
                 const langInstruction = selectedLang !== 'es' ? `\n[Responde en ${selectedLang === 'en' ? 'inglés' : selectedLang === 'fr' ? 'francés' : 'alemán'}]` : '';
                 const regionInstruction = `\n[Región del cliente: ${selectedRegion === 'es' ? 'España' : 'Europa (no España)'}]`;
-                const payload = { message: text + langInstruction + regionInstruction, region: selectedRegion };
+                const modelInstruction = selectedBrand && selectedModel && selectedModel !== 'unknown'
+                    ? `\n[Impresora del usuario: ${selectedBrand} ${selectedModel}]` : '';
+                const payload = { message: text + langInstruction + regionInstruction + modelInstruction, region: selectedRegion };
                 if (currentThreadId) {
                     payload.thread_id = currentThreadId;
                 }
@@ -1016,36 +1112,28 @@
         }
 
         async function newChat() {
-            // Reset thread so next conversation starts fresh
+            // Reset thread and selections
             currentThreadId = null;
+            selectedBrand = null;
+            selectedModel = null;
             try {
                 await fetch('/api/new-chat', { method: 'POST' });
             } catch (e) {}
 
             const labels = langLabels[selectedLang];
-            const questions = getRandomQuestions(selectedLang, 4);
             chatContainer.innerHTML = `
                 <div class="welcome" id="welcomeScreen">
                     <div class="welcome-icon">🖨️</div>
                     <h2>${labels.title}</h2>
-                    <p>${labels.subtitle}</p>
-                    <div class="suggestions">
-                        ${questions.map(q => `<div class="suggestion" onclick="sendSuggestion(this)">${q}</div>`).join('')}
-                    </div>
+                    <p id="welcomeSubtitle"></p>
+                    <div class="wizard" id="wizard"></div>
                 </div>`;
+            renderWizard();
             messageInput.focus();
         }
 
-        // Populate initial starter questions
-        (function() {
-            const container = document.getElementById('initialSuggestions');
-            if (container) {
-                const questions = getRandomQuestions(selectedLang, 4);
-                container.innerHTML = questions.map(q =>
-                    `<div class="suggestion" onclick="sendSuggestion(this)">${q}</div>`
-                ).join('');
-            }
-        })();
+        // Initialize wizard on load
+        renderWizard();
 
         // Focus input on load
         messageInput.focus();
