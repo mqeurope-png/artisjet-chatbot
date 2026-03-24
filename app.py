@@ -64,6 +64,66 @@ except Exception:
 request_counts = {}
 MAX_REQUESTS_PER_HOUR = int(os.environ.get("MAX_REQUESTS_PER_HOUR", 30))
 
+# Token usage tracking
+_usage_path = os.path.join(os.path.dirname(__file__), "token_usage.json")
+_default_usage = {
+    "total_prompt_tokens": 0,
+    "total_completion_tokens": 0,
+    "total_tokens": 0,
+    "total_requests": 0,
+    "daily": {}  # "2026-03-24": {prompt, completion, total, requests}
+}
+
+def _load_usage():
+    try:
+        with open(_usage_path, "r") as f:
+            return json.load(f)
+    except Exception:
+        return _default_usage.copy()
+
+def _save_usage(usage):
+    try:
+        with open(_usage_path, "w") as f:
+            json.dump(usage, f, indent=2)
+    except Exception:
+        pass
+
+def track_tokens(run_status):
+    """Track token usage from a completed run."""
+    usage_data = getattr(run_status, 'usage', None)
+    if not usage_data:
+        return None
+
+    prompt_tokens = getattr(usage_data, 'prompt_tokens', 0)
+    completion_tokens = getattr(usage_data, 'completion_tokens', 0)
+    total = prompt_tokens + completion_tokens
+
+    usage = _load_usage()
+    usage["total_prompt_tokens"] += prompt_tokens
+    usage["total_completion_tokens"] += completion_tokens
+    usage["total_tokens"] += total
+    usage["total_requests"] += 1
+
+    # Daily breakdown
+    today = time.strftime("%Y-%m-%d")
+    if today not in usage.get("daily", {}):
+        usage.setdefault("daily", {})[today] = {
+            "prompt_tokens": 0, "completion_tokens": 0,
+            "total_tokens": 0, "requests": 0
+        }
+    usage["daily"][today]["prompt_tokens"] += prompt_tokens
+    usage["daily"][today]["completion_tokens"] += completion_tokens
+    usage["daily"][today]["total_tokens"] += total
+    usage["daily"][today]["requests"] += 1
+
+    _save_usage(usage)
+
+    app.logger.info(
+        f"[TOKENS] This request: {prompt_tokens} prompt + {completion_tokens} completion = {total} | "
+        f"Cumulative: {usage['total_tokens']} tokens, {usage['total_requests']} requests"
+    )
+    return {"prompt_tokens": prompt_tokens, "completion_tokens": completion_tokens, "total": total}
+
 
 def _wc_request(shop, params, per_page=6):
     """Single WooCommerce API request."""
@@ -484,6 +544,7 @@ def chat():
         max_wait = 90  # segundos (más tiempo por posible WooCommerce call)
         start = time.time()
         products_found = []
+        token_info = None
 
         while time.time() - start < max_wait:
             run_status = client.beta.threads.runs.retrieve(
@@ -492,6 +553,8 @@ def chat():
             )
 
             if run_status.status == "completed":
+                # Track token usage
+                token_info = track_tokens(run_status)
                 break
             elif run_status.status == "requires_action":
                 # Handle function calls (product search)
@@ -584,13 +647,16 @@ def chat():
         # Generar sugerencias de seguimiento basadas en el contexto
         follow_ups = generate_follow_ups(thread_id, user_message, response_text)
 
-        return jsonify({
+        result = {
             "response": response_text,
             "sources": sources,
             "thread_id": thread_id,
             "follow_ups": follow_ups,
             "products": products_found
-        })
+        }
+        if token_info:
+            result["tokens"] = token_info
+        return jsonify(result)
 
     except Exception as e:
         return jsonify({"error": f"Error: {str(e)}"}), 500
@@ -612,6 +678,43 @@ def new_chat():
     """Inicia una nueva conversación."""
     session.pop("thread_id", None)
     return jsonify({"status": "ok"})
+
+
+@app.route("/api/usage", methods=["GET"])
+def usage_api():
+    """Token usage statistics. Access with ?key=admin-key for protection."""
+    admin_key = os.environ.get("USAGE_ADMIN_KEY", "bomedia2024")
+    if request.args.get("key") != admin_key:
+        return jsonify({"error": "Unauthorized. Add ?key=YOUR_KEY"}), 401
+
+    usage = _load_usage()
+
+    # Estimate cost (GPT-4o pricing: $2.50/1M input, $10/1M output)
+    prompt_cost = (usage["total_prompt_tokens"] / 1_000_000) * 2.50
+    completion_cost = (usage["total_completion_tokens"] / 1_000_000) * 10.00
+    total_cost = prompt_cost + completion_cost
+
+    # Also count follow-up generation tokens (gpt-4o-mini: $0.15/1M input, $0.60/1M output)
+    # These are approximate — follow-ups use ~300 tokens per call
+    followup_est = usage["total_requests"] * 300
+    followup_cost = (followup_est / 1_000_000) * 0.60
+
+    return jsonify({
+        "totals": {
+            "prompt_tokens": usage["total_prompt_tokens"],
+            "completion_tokens": usage["total_completion_tokens"],
+            "total_tokens": usage["total_tokens"],
+            "total_requests": usage["total_requests"]
+        },
+        "estimated_cost": {
+            "assistant_input": f"${prompt_cost:.4f}",
+            "assistant_output": f"${completion_cost:.4f}",
+            "followups_est": f"${followup_cost:.4f}",
+            "total_usd": f"${total_cost + followup_cost:.4f}"
+        },
+        "daily": usage.get("daily", {}),
+        "note": "Costs are estimates based on GPT-4o pricing ($2.50/1M input, $10/1M output)"
+    })
 
 
 @app.route("/health")
