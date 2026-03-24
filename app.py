@@ -277,6 +277,71 @@ PRODUCT_SEARCH_TOOL = {
 }
 
 
+def detect_parts_in_text(text, user_message=""):
+    """Detect spare part keywords in assistant response or user message.
+    Returns list of search terms if parts are mentioned."""
+    combined = f"{text} {user_message}".lower()
+
+    # Map of part keywords → search query
+    part_keywords = {
+        'damper': 'damper',
+        'amortiguador': 'damper',
+        'captop': 'captop',
+        'cap top': 'captop',
+        'capping': 'captop',
+        'wiper': 'wiper',
+        'limpiador': 'wiper',
+        'cabezal': 'cabezal',
+        'printhead': 'cabezal',
+        'print head': 'cabezal',
+        'tinta': 'tinta',
+        'ink': 'tinta',
+        'cartucho': 'cartucho',
+        'cartridge': 'cartucho',
+        'placa': 'placa',
+        'board': 'board',
+        'sensor': 'sensor',
+        'cable': 'cable',
+        'bomba': 'bomba',
+        'pump': 'bomba',
+        'lámpara uv': 'lampara uv',
+        'uv lamp': 'lampara uv',
+        'correa': 'correa',
+        'belt': 'correa',
+        'tubo': 'tubo',
+        'tube': 'tubo',
+        'jeringuilla': 'jeringuilla',
+        'syringe': 'jeringuilla',
+        'filtro': 'filtro',
+        'filter': 'filtro',
+    }
+
+    found = []
+    for keyword, search_term in part_keywords.items():
+        if keyword in combined and search_term not in found:
+            found.append(search_term)
+
+    return found[:2]  # Max 2 search terms to keep it focused
+
+
+def detect_model_in_text(text, user_message=""):
+    """Detect printer model mentioned in text."""
+    combined = f"{text} {user_message}".lower()
+    model_map = {
+        'trust': 'Trust_6090', '6090': 'Trust_6090',
+        'young': 'Young',
+        '3000u pro': '3000U_Pro', '3000 pro': '3000U_Pro', 'freebird': '3000U_Pro',
+        '5000': '5000U',
+        '2100': '2100U',
+        'proud': 'Proud', 'prov6': 'Proud', 'pro v6': 'Proud',
+        'mbo': 'MBO', '4060': 'MBO', '3020': 'MBO',
+    }
+    for keyword, model in model_map.items():
+        if keyword in combined:
+            return model
+    return None
+
+
 def get_or_create_thread():
     """Obtiene el thread actual o crea uno nuevo."""
     thread_id = session.get("thread_id")
@@ -483,6 +548,25 @@ def chat():
                         text = re.sub(r'\s+([.,;:!?])', r'\1', text)
                         response_text = text.strip()
                 break
+
+        # AUTO-SEARCH: If assistant didn't search for products but the response
+        # mentions spare parts, search automatically as suggestions
+        if not products_found:
+            detected_parts = detect_parts_in_text(response_text, user_message)
+            if detected_parts:
+                detected_model = detect_model_in_text(response_text, user_message)
+                app.logger.info(f"[AUTO-SEARCH] Parts detected: {detected_parts}, model: {detected_model}")
+                for part_query in detected_parts:
+                    auto_products = search_woocommerce(part_query, user_region, model=detected_model)
+                    products_found.extend(auto_products)
+                # Deduplicate by URL
+                seen_urls = set()
+                unique_products = []
+                for p in products_found:
+                    if p['url'] not in seen_urls:
+                        seen_urls.add(p['url'])
+                        unique_products.append(p)
+                products_found = unique_products[:4]
 
         # Generar sugerencias de seguimiento basadas en el contexto
         follow_ups = generate_follow_ups(thread_id, user_message, response_text)
