@@ -360,9 +360,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 10px;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid var(--border);
         }
         .product-card {
             background: var(--bg);
@@ -424,6 +421,23 @@
         }
         .product-card:hover .product-btn {
             background: var(--primary-dark);
+        }
+        .products-header {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+        }
+        .products-header .products-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .products-header .products-disclaimer {
+            font-size: 11px;
+            color: var(--text-light);
+            line-height: 1.4;
+            margin-bottom: 8px;
         }
 
         /* Region selector */
@@ -699,6 +713,14 @@
 
                 // Add product cards if products were found
                 if (products && products.length > 0) {
+                    const header = document.createElement('div');
+                    header.className = 'products-header';
+                    header.innerHTML = `
+                        <div class="products-title">Productos sugeridos</div>
+                        <div class="products-disclaimer">Estos productos pueden variar seg\u00fan el modelo de tu impresora. Si no est\u00e1s seguro, ind\u00edcame tu modelo exacto para confirmar compatibilidad.</div>
+                    `;
+                    content.appendChild(header);
+
                     const grid = document.createElement('div');
                     grid.className = 'products-grid';
                     products.forEach(p => {
@@ -707,7 +729,7 @@
                         card.href = p.url;
                         card.target = '_blank';
                         card.rel = 'noopener';
-                        const priceText = p.price ? `${p.price}€` : 'Consultar';
+                        const priceText = p.price ? `${p.price}\u20ac` : 'Consultar';
                         const skuText = p.sku ? `SKU: ${p.sku}` : '';
                         card.innerHTML = `
                             <img src="${p.image || p.image_full || ''}" alt="${p.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 150%22><rect fill=%22%23f3f4f6%22 width=%22200%22 height=%22150%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 fill=%22%239ca3af%22 font-size=%2214%22>Sin imagen</text></svg>'">
