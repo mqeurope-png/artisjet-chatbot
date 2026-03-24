@@ -975,72 +975,119 @@
         }
 
         function formatMarkdown(text) {
-            // Basic markdown → HTML
-            let html = text
-                // Code blocks
-                .replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>')
-                // Inline code
-                .replace(/`([^`]+)`/g, '<code>$1</code>')
-                // Bold
-                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-                // Italic
-                .replace(/\*(.+?)\*/g, '<em>$1</em>')
-                // Headers
-                .replace(/^### (.+)$/gm, '<strong>$1</strong>')
-                .replace(/^## (.+)$/gm, '<strong>$1</strong>')
-                .replace(/^# (.+)$/gm, '<strong>$1</strong>');
+            // Line-by-line parser for robust markdown rendering
+            const lines = text.split('\n');
+            let html = '';
+            let inOl = false;
+            let inUl = false;
+            let inCode = false;
+            let codeBlock = '';
 
-            // Markdown links [text](url) → clickable links with Video/PDF styling
+            function closeList() {
+                if (inOl) { html += '</ol>'; inOl = false; }
+                if (inUl) { html += '</ul>'; inUl = false; }
+            }
+
+            for (let i = 0; i < lines.length; i++) {
+                let line = lines[i];
+
+                // Code blocks
+                if (line.trim().startsWith('```')) {
+                    if (inCode) {
+                        html += '<pre><code>' + codeBlock + '</code></pre>';
+                        codeBlock = '';
+                        inCode = false;
+                    } else {
+                        closeList();
+                        inCode = true;
+                    }
+                    continue;
+                }
+                if (inCode) { codeBlock += line + '\n'; continue; }
+
+                // Inline formatting
+                line = line
+                    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+                    .replace(/`([^`]+)`/g, '<code>$1</code>');
+
+                // Headers
+                if (/^###\s+(.+)$/.test(line)) {
+                    closeList();
+                    html += '<strong>' + line.replace(/^###\s+/, '') + '</strong><br>';
+                    continue;
+                }
+                if (/^##?\s+(.+)$/.test(line)) {
+                    closeList();
+                    html += '<strong>' + line.replace(/^##?\s+/, '') + '</strong><br>';
+                    continue;
+                }
+
+                // Numbered list item
+                if (/^\d+\.\s+/.test(line)) {
+                    if (inUl) { html += '</ul>'; inUl = false; }
+                    if (!inOl) { html += '<ol>'; inOl = true; }
+                    html += '<li>' + line.replace(/^\d+\.\s+/, '') + '</li>';
+                    continue;
+                }
+
+                // Bullet list item (- or •)
+                if (/^[-•]\s+/.test(line)) {
+                    if (inOl) { html += '</ol>'; inOl = false; }
+                    if (!inUl) { html += '<ul>'; inUl = true; }
+                    html += '<li>' + line.replace(/^[-•]\s+/, '') + '</li>';
+                    continue;
+                }
+
+                // Sub-bullet under a list (indented - )
+                if (/^\s+[-•]\s+/.test(line) && (inOl || inUl)) {
+                    html += '<li style="margin-left:16px">' + line.replace(/^\s+[-•]\s+/, '') + '</li>';
+                    continue;
+                }
+
+                // Empty line — close lists and add paragraph break
+                if (line.trim() === '') {
+                    closeList();
+                    html += '<br>';
+                    continue;
+                }
+
+                // Normal text
+                closeList();
+                html += line + '<br>';
+            }
+            closeList();
+
+            // Links: [text](url) with Video/PDF styling
             html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, function(match, linkText, url) {
-                // Detect Video or PDF prefix
                 if (linkText.match(/^Video\s*-\s*/i)) {
                     return '<a href="' + url + '" target="_blank" rel="noopener" class="resource-link video-link">' + linkText + '</a>';
                 }
                 if (linkText.match(/^PDF\s*-\s*/i)) {
                     return '<a href="' + url + '" target="_blank" rel="noopener" class="resource-link pdf-link">' + linkText + '</a>';
                 }
-                // Drive URLs without prefix → default to video style
                 if (url.includes('drive.google.com')) {
                     return '<a href="' + url + '" target="_blank" rel="noopener" class="resource-link video-link">' + linkText + '</a>';
                 }
-                // Bomedia support link or other
                 return '<a href="' + url + '" target="_blank" rel="noopener" style="color:var(--primary)">' + linkText + '</a>';
             });
 
-            // Plain Drive URLs (not already in a link) → video link buttons
-            html = html.replace(/(?<!href=")(https:\/\/drive\.google\.com\/file\/d\/[^\s\)]+)/g, function(url) {
+            // Plain Drive URLs
+            html = html.replace(/(?<!href=")(https:\/\/drive\.google\.com\/file\/d\/[^\s<\)]+)/g, function(url) {
                 return '<a href="' + url + '" target="_blank" rel="noopener" class="resource-link video-link">Video - Ver tutorial</a>';
             });
 
-            // Plain URLs (not already in a link)
+            // Plain URLs
             html = html.replace(/(?<!href=")(https?:\/\/(?!drive\.google\.com)[^\s<\)]+)/g, function(url) {
                 return '<a href="' + url + '" target="_blank" rel="noopener" style="color:var(--primary)">' + url + '</a>';
             });
 
-            // Clean up emoji prefixes before links (assistant sometimes adds these)
+            // Clean up emoji prefixes
             html = html.replace(/📹\s*(Video tutorial disponible:?\s*)?/gi, '');
             html = html.replace(/📄\s*(Documento completo:?\s*)?/gi, '');
 
-            // Numbered lists
-            html = html.replace(/((?:^\d+\..+\n?)+)/gm, function(match) {
-                const items = match.trim().split('\n')
-                    .map(line => '<li>' + line.replace(/^\d+\.\s*/, '') + '</li>')
-                    .join('');
-                return '<ol>' + items + '</ol>';
-            });
-
-            // Bullet lists
-            html = html.replace(/((?:^[-•]\s.+\n?)+)/gm, function(match) {
-                const items = match.trim().split('\n')
-                    .map(line => '<li>' + line.replace(/^[-•]\s*/, '') + '</li>')
-                    .join('');
-                return '<ul>' + items + '</ul>';
-            });
-
-            // Paragraphs
-            html = html.replace(/\n\n/g, '</p><p>');
-            html = '<p>' + html + '</p>';
-            html = html.replace(/<p><\/p>/g, '');
+            // Clean up excessive <br>
+            html = html.replace(/(<br>){3,}/g, '<br><br>');
 
             return html;
         }
