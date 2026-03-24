@@ -123,7 +123,7 @@ def _find_skus_for_part(part_name, model=None):
     return matches[:5]
 
 
-def search_woocommerce(query, region="es", per_page=6, model=None):
+def search_woocommerce(query, region="es", per_page=4, model=None):
     """Search products using multiple strategies:
     1. SKU search (if query looks like a SKU or matches parts_index)
     2. Category-filtered search (if model is specified)
@@ -143,9 +143,27 @@ def search_woocommerce(query, region="es", per_page=6, model=None):
         words = query.strip().split()
         core_words = [w for w in words if w.lower() not in noise_words and len(w) >= 2]
 
+        # Categories that are NOT spare parts — used to filter out irrelevant products
+        non_spare_cats = {
+            'fluxlasers', 'impresoras uv led', 'impresoras textil', 'impresoras dtf',
+            'hornos dtf', 'corte láser', 'servicios', 'uv dtf', 'consumibles textil',
+            'láseres de fibra', 'smartjet', 'uv led printers', 'software', 'impresoras-uv-led'
+        }
+
+        def is_relevant(product, keywords):
+            """Check if product is relevant: matches keywords AND is a spare part."""
+            # Exclude printers, machines, lasers etc.
+            prod_cats = [c.get('name', '').lower() for c in product.get('categories', [])]
+            if any(any(nc in cat for nc in non_spare_cats) for cat in prod_cats):
+                return False
+            # Check keyword match in name/description/sku
+            text = f"{product.get('name','')} {product.get('short_description','')} {product.get('sku','')}".lower()
+            return any(kw.lower() in text for kw in keywords if len(kw) >= 3)
+
         # --- Strategy 1: SKU-based search ---
         # Check if query IS a SKU
         if query.upper().startswith(("SPU-", "YPB-", "YIS-", "UA3", "UA4", "U1")):
+            app.logger.info(f"[SEARCH] Strategy 1a: direct SKU '{query}'")
             results = _wc_request(shop, {"sku": query}, per_page)
             if results:
                 all_results.extend(results)
@@ -153,13 +171,18 @@ def search_woocommerce(query, region="es", per_page=6, model=None):
         # Find SKUs from parts_index matching the part name
         if not all_results:
             skus = _find_skus_for_part(' '.join(core_words), model)
+            app.logger.info(f"[SEARCH] Strategy 1b: parts_index matched SKUs: {skus}")
             for sku in skus[:3]:
                 results = _wc_request(shop, {"sku": sku}, per_page=2)
                 all_results.extend(results)
 
+        # If SKU search found enough results, skip other strategies
+        if len(all_results) >= per_page:
+            app.logger.info(f"[SEARCH] SKU strategy found {len(all_results)} — enough results")
+            return _format_products(all_results)[:per_page]
+
         # --- Strategy 2: Category-filtered text search ---
         if model and len(all_results) < per_page:
-            # Map model name to category ID
             cat_id = None
             model_upper = model.upper().replace(" ", "_")
             for cat_name, cid in categories.items():
@@ -171,20 +194,23 @@ def search_woocommerce(query, region="es", per_page=6, model=None):
 
             if cat_id:
                 search_term = ' '.join(core_words) if core_words else query
+                app.logger.info(f"[SEARCH] Strategy 2: search='{search_term}' in category {cat_id}")
                 results = _wc_request(shop, {"search": search_term, "category": str(cat_id)}, per_page)
-                all_results.extend(results)
+                # Only add relevant results
+                for r in results:
+                    if is_relevant(r, core_words):
+                        all_results.append(r)
 
-                # If still nothing, browse the whole category
+                # If still nothing, browse the whole category and filter
                 if not all_results:
-                    results = _wc_request(shop, {"category": str(cat_id), "orderby": "title", "order": "asc"}, per_page=20)
-                    # Filter locally by matching keywords
+                    app.logger.info(f"[SEARCH] Strategy 2b: browsing full category {cat_id}")
+                    results = _wc_request(shop, {"category": str(cat_id), "orderby": "title", "order": "asc"}, per_page=50)
                     for p in results:
-                        combined_text = f"{p.get('name','')} {p.get('short_description','')} {p.get('sku','')}".lower()
-                        if any(w.lower() in combined_text for w in core_words):
+                        if is_relevant(p, core_words):
                             all_results.append(p)
 
-        # --- Strategy 3: Progressive text search (no category filter) ---
-        if len(all_results) < per_page:
+        # --- Strategy 3: Global text search (only if nothing found yet) ---
+        if not all_results:
             attempts = []
             if core_words:
                 attempts.append(' '.join(core_words))
@@ -196,9 +222,16 @@ def search_woocommerce(query, region="es", per_page=6, model=None):
                 attempts.append(query)
 
             for attempt in attempts:
-                results = _wc_request(shop, {"search": attempt}, per_page)
-                if results:
-                    all_results.extend(results)
+                app.logger.info(f"[SEARCH] Strategy 3: global search '{attempt}'")
+                results = _wc_request(shop, {"search": attempt}, per_page=15)
+                # Filter for relevance
+                relevant = [r for r in results if is_relevant(r, core_words)]
+                if relevant:
+                    all_results.extend(relevant)
+                    break
+                elif results:
+                    # No relevant filter match, use first few results as-is
+                    all_results.extend(results[:per_page])
                     break
 
         return _format_products(all_results)[:per_page]
@@ -391,7 +424,9 @@ def chat():
                         query = args.get("query", "")
                         region = args.get("region", user_region)
                         model = args.get("model", None)
+                        app.logger.info(f"[PRODUCT SEARCH] query='{query}' region='{region}' model='{model}'")
                         products = search_woocommerce(query, region, model=model)
+                        app.logger.info(f"[PRODUCT SEARCH] Found {len(products)} products")
                         products_found.extend(products)
 
                         # Return results to the assistant so it can reference them
@@ -471,7 +506,7 @@ def search_products_api():
     region = request.args.get("region", "es")
     if not query:
         return jsonify({"products": [], "error": "No search query"}), 400
-    products = search_woocommerce(query, region, per_page=6)
+    products = search_woocommerce(query, region, per_page=4)
     return jsonify({"products": products, "query": query, "region": region})
 
 
