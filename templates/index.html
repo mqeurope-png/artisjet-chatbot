@@ -355,6 +355,109 @@
             border-color: var(--primary);
         }
 
+        /* Product cards */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+        .product-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(26,86,219,0.15);
+            transform: translateY(-2px);
+        }
+        .product-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            background: #fff;
+        }
+        .product-card .product-info {
+            padding: 8px 10px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .product-card .product-name {
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .product-card .product-sku {
+            font-size: 11px;
+            color: var(--text-light);
+        }
+        .product-card .product-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: auto;
+        }
+        .product-card .product-btn {
+            display: block;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .product-card:hover .product-btn {
+            background: var(--primary-dark);
+        }
+
+        /* Region selector */
+        .region-selector {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2px;
+        }
+        .region-btn {
+            background: none;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-light);
+            line-height: 1;
+        }
+        .region-btn:hover {
+            background: var(--white);
+            color: var(--text);
+        }
+        .region-btn.active {
+            background: var(--white);
+            color: var(--primary);
+            font-weight: 600;
+            box-shadow: var(--shadow);
+        }
+
         /* Typing indicator */
         .typing {
             display: flex;
@@ -468,6 +571,10 @@
             </div>
         </div>
         <div class="header-right">
+            <div class="region-selector" title="Tienda / Shop">
+                <button class="region-btn active" onclick="setRegion('es', this)">🇪🇸 ES</button>
+                <button class="region-btn" onclick="setRegion('eu', this)">🇪🇺 EU</button>
+            </div>
             <div class="lang-selector">
                 <button class="lang-btn active" onclick="setLang('es', this)" title="Español">ES</button>
                 <button class="lang-btn" onclick="setLang('en', this)" title="English">EN</button>
@@ -523,6 +630,13 @@
         const welcomeScreen = document.getElementById('welcomeScreen');
         let isWaiting = false;
         let selectedLang = 'es';
+        let selectedRegion = 'es';
+
+        function setRegion(region, btn) {
+            selectedRegion = region;
+            document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
 
         const langLabels = {
             es: { title: 'Soporte Técnico Bomedia', subtitle: 'Pregunta sobre instalación, mantenimiento, errores, impresión o software de tu impresora UV (artisJet o MBO).', placeholder: 'Escribe tu consulta técnica...', newChat: '+ Nueva consulta', footer: 'Bomedia Technical Support — Las respuestas se basan en documentación oficial de artisJet y MBO' },
@@ -565,7 +679,7 @@
             sendMessage();
         }
 
-        function addMessage(text, role, followUps) {
+        function addMessage(text, role, followUps, products) {
             if (welcomeScreen) {
                 welcomeScreen.remove();
             }
@@ -582,6 +696,32 @@
 
             if (role === 'bot') {
                 content.innerHTML = formatMarkdown(text);
+
+                // Add product cards if products were found
+                if (products && products.length > 0) {
+                    const grid = document.createElement('div');
+                    grid.className = 'products-grid';
+                    products.forEach(p => {
+                        const card = document.createElement('a');
+                        card.className = 'product-card';
+                        card.href = p.url;
+                        card.target = '_blank';
+                        card.rel = 'noopener';
+                        const priceText = p.price ? `${p.price}€` : 'Consultar';
+                        const skuText = p.sku ? `SKU: ${p.sku}` : '';
+                        card.innerHTML = `
+                            <img src="${p.image || p.image_full || ''}" alt="${p.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 150%22><rect fill=%22%23f3f4f6%22 width=%22200%22 height=%22150%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 fill=%22%239ca3af%22 font-size=%2214%22>Sin imagen</text></svg>'">
+                            <div class="product-info">
+                                <div class="product-name">${p.name}</div>
+                                ${skuText ? `<div class="product-sku">${skuText}</div>` : ''}
+                                <div class="product-price">${priceText}</div>
+                            </div>
+                            <div class="product-btn">Ver en tienda</div>
+                        `;
+                        grid.appendChild(card);
+                    });
+                    content.appendChild(grid);
+                }
 
                 // Add follow-up suggestions
                 if (followUps && followUps.length > 0) {
@@ -730,7 +870,8 @@
             try {
                 // Build payload with thread_id for conversation continuity
                 const langInstruction = selectedLang !== 'es' ? `\n[Responde en ${selectedLang === 'en' ? 'inglés' : selectedLang === 'fr' ? 'francés' : 'alemán'}]` : '';
-                const payload = { message: text + langInstruction };
+                const regionInstruction = `\n[Región del cliente: ${selectedRegion === 'es' ? 'España' : 'Europa (no España)'}]`;
+                const payload = { message: text + langInstruction + regionInstruction, region: selectedRegion };
                 if (currentThreadId) {
                     payload.thread_id = currentThreadId;
                 }
@@ -757,7 +898,7 @@
                     if (data.thread_id) {
                         currentThreadId = data.thread_id;
                     }
-                    addMessage(data.response, 'bot', data.follow_ups || []);
+                    addMessage(data.response, 'bot', data.follow_ups || [], data.products || []);
                 }
             } catch (err) {
                 removeTypingIndicator();
