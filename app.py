@@ -690,6 +690,11 @@ def usage_api():
     if request.args.get("key") != admin_key:
         return jsonify({"error": "Unauthorized. Add ?key=YOUR_KEY"}), 401
 
+    # Reset counter if requested
+    if request.args.get("reset") == "true":
+        _save_usage(_default_usage.copy())
+        return jsonify({"status": "reset", "message": "Token usage counter has been reset to zero."})
+
     usage = _load_usage()
 
     # Estimate cost (GPT-4o pricing: $2.50/1M input, $10/1M output)
