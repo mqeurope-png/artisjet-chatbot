@@ -1,0 +1,3688 @@
+{
+  "SPU-PBTY-001": {
+    "sku": "SPU-PBTY-001",
+    "name": "Printer Main Board",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PBTY-002": {
+    "sku": "SPU-PBTY-002",
+    "name": "Head Board",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PBTY-003": {
+    "sku": "SPU-PBTY-003",
+    "name": "Sensor Board",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PBTY-004": {
+    "sku": "SPU-PBTY-004",
+    "name": "Printer Main Board 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PBTY-005": {
+    "sku": "SPU-PBTY-005",
+    "name": "Head Board 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PBTY-006": {
+    "sku": "SPU-PBTY-006",
+    "name": "Transfer board for Printhead data cable from 6 to 8",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PBTY-007": {
+    "sku": "SPU-PBTY-007",
+    "name": "Control panel board  V6 Pround",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PBTY-008": {
+    "sku": "SPU-PBTY-008",
+    "name": "Control Panel - Keypad for V6 YOUNG",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PBTY-009": {
+    "sku": "SPU-PBTY-009",
+    "name": "control panel board",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PBTY-010": {
+    "sku": "SPU-PBTY-010",
+    "name": "Signal Board to control air cooling fan standby",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-007": {
+    "sku": "SPU-OSTY-007",
+    "name": "Program Writer",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-CSTY-001": {
+    "sku": "SPU-CSTY-001",
+    "name": "Head Cable",
+    "description": "2PC/Machine",
+    "system": "CABLING",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-CSTY-002": {
+    "sku": "SPU-CSTY-002",
+    "name": "Fiber Cable from Head Board to Main Board",
+    "description": "2PC/Machine",
+    "system": "CABLING",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-CSTY-003": {
+    "sku": "SPU-CSTY-003",
+    "name": "Flat Cable from Mail Board to Sensor Board",
+    "description": "1PC/Machine",
+    "system": "CABLING",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-CSTY-004": {
+    "sku": "SPU-CSTY-004",
+    "name": "Head Cable 6 ink channel 2 PCS/set",
+    "description": "1PC/Machine",
+    "system": "CABLING",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-CSTY-005": {
+    "sku": "SPU-CSTY-005",
+    "name": "Cable from UV Lamp to Power Supply",
+    "description": "1PC/Machine",
+    "system": "CABLING",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-CSTY-007": {
+    "sku": "SPU-CSTY-007",
+    "name": "Cable from Printer Board to Head Power Supply",
+    "description": "1PC/Machine",
+    "system": "CABLING",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PSTY-001": {
+    "sku": "SPU-PSTY-001",
+    "name": "24V Power supply board",
+    "description": "1PC/Machine",
+    "system": "POWER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PSTY-002": {
+    "sku": "SPU-PSTY-002",
+    "name": "Power Supply for Head Board",
+    "description": "1PC/Machine",
+    "system": "POWER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PSTY-005": {
+    "sku": "SPU-PSTY-005",
+    "name": "UV POWER SUPPLY for V6 Cooling UV lamp",
+    "description": "1PC/Machine",
+    "system": "POWER",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-USTY-001": {
+    "sku": "SPU-USTY-001",
+    "name": "UV Lamp Module",
+    "description": "1PC/Machine",
+    "system": "UV LED",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-001": {
+    "sku": "SPU-DMTY-001",
+    "name": "CR Motor",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-011": {
+    "sku": "SPU-DMTY-011",
+    "name": "Carriage sliding block",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young",
+      "3000U_Pro"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-004": {
+    "sku": "SPU-DMTY-004",
+    "name": "Peristaltic pump driver",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-006": {
+    "sku": "SPU-DMTY-006",
+    "name": "Y Scale Motor",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-007": {
+    "sku": "SPU-DMTY-007",
+    "name": "Y motor driver 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-012": {
+    "sku": "SPU-DMTY-012",
+    "name": "Y Scale Motor Young/V6",
+    "description": "young，V6Y轴电机 老款",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-013": {
+    "sku": "SPU-DMTY-013",
+    "name": "Z axis motor",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-016": {
+    "sku": "SPU-DMTY-016",
+    "name": "Belt for CR Motor",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-017": {
+    "sku": "SPU-DMTY-017",
+    "name": "Small Rack",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-018": {
+    "sku": "SPU-DMTY-018",
+    "name": "Small Gear",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-019": {
+    "sku": "SPU-DMTY-019",
+    "name": "Y-Axis Motor Reducer",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-020": {
+    "sku": "SPU-DMTY-020",
+    "name": "Synchronous Wheel",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-021": {
+    "sku": "SPU-DMTY-021",
+    "name": "Synchronous Wheel",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-022": {
+    "sku": "SPU-DMTY-022",
+    "name": "Synchronous Wheel",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMY4-003": {
+    "sku": "SPU-DMY4-003",
+    "name": "Belt for Y scale 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-014": {
+    "sku": "SPU-DMTY-014",
+    "name": "Synchronous Wheel",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMV6-014": {
+    "sku": "SPU-DMV6-014",
+    "name": "Carriage sliding block",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-015": {
+    "sku": "SPU-DMTY-015",
+    "name": "Belt for Z scale 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-SSTY-001": {
+    "sku": "SPU-SSTY-001",
+    "name": "Sensor of Carriage",
+    "description": "1PC/Machine",
+    "system": "SENSOR OF MACHINE",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-SSTY-003": {
+    "sku": "SPU-SSTY-003",
+    "name": "Height sensor of Table",
+    "description": "1SET(2PCS)/Machine",
+    "system": "SENSOR OF MACHINE",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-SSY4-001": {
+    "sku": "SPU-SSY4-001",
+    "name": "Encoder Strip",
+    "description": "1PC/Machine",
+    "system": "SENSOR OF MACHINE",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-SSY4-002": {
+    "sku": "SPU-SSY4-002",
+    "name": "Magnetic grid",
+    "description": "1PC/Machine",
+    "system": "SENSOR OF MACHINE",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-SSTY-006": {
+    "sku": "SPU-SSTY-006",
+    "name": "Magnetic grid sensor",
+    "description": "1PC/Machine",
+    "system": "SENSOR OF MACHINE",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-SSTY-005": {
+    "sku": "SPU-SSTY-005",
+    "name": "Encoder Strip Sensor",
+    "description": "1PC/Machine",
+    "system": "SENSOR OF MACHINE",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-006": {
+    "sku": "SPU-ISTY-006",
+    "name": "Ink Tube",
+    "description": "4pcs*3M/roll",
+    "system": "INK SYSTEM",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-014": {
+    "sku": "SPU-ISTY-014",
+    "name": "Waste ink cartridge",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-003": {
+    "sku": "SPU-ISTY-003",
+    "name": "Ink Service Station",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-009": {
+    "sku": "SPU-ISTY-009",
+    "name": "Waste ink pump 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-010": {
+    "sku": "SPU-ISTY-010",
+    "name": "Air Pump",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-004": {
+    "sku": "SPU-ISTY-004",
+    "name": "Wiper",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-002": {
+    "sku": "SPU-ISTY-002",
+    "name": "Cap top",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-032": {
+    "sku": "SPU-ISTY-032",
+    "name": "Ink TubeTank",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-005": {
+    "sku": "SPU-ISTY-005",
+    "name": "Wiper Station",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-008": {
+    "sku": "SPU-ISTY-008",
+    "name": "Peristaltic Pump 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-030": {
+    "sku": "SPU-ISTY-030",
+    "name": "Peristaltic pump head",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-001": {
+    "sku": "SPU-ISTY-001",
+    "name": "Damper",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-006": {
+    "sku": "SPU-OSTY-006",
+    "name": "Purifier unit",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-003": {
+    "sku": "SPU-OSTY-003",
+    "name": "Power Cable",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-003-1": {
+    "sku": "SPU-OSTY-003-1",
+    "name": "Power Cable",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-003-2": {
+    "sku": "SPU-OSTY-003-2",
+    "name": "Power Cable",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-003-3": {
+    "sku": "SPU-OSTY-003-3",
+    "name": "Power Cable",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-003-4": {
+    "sku": "SPU-OSTY-003-4",
+    "name": "Power Cable",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-004": {
+    "sku": "SPU-OSTY-004",
+    "name": "USB 2.0 cable",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-005": {
+    "sku": "SPU-OSTY-005",
+    "name": "Power button",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSY4-001": {
+    "sku": "SPU-OSY4-001",
+    "name": "Lid",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSY4-003": {
+    "sku": "SPU-OSY4-003",
+    "name": "BODY-COVER",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-026": {
+    "sku": "SPU-ISTY-026",
+    "name": "Angle Connector",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-024": {
+    "sku": "SPU-ISTY-024",
+    "name": "Rubber tube",
+    "description": "3pc/set",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-017": {
+    "sku": "SPU-ISTY-017",
+    "name": "Y Rubber tube 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-023": {
+    "sku": "SPU-ISTY-023",
+    "name": "Ink TubeTank 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-029": {
+    "sku": "SPU-ISTY-029",
+    "name": "Connector of Peristaltic Pump",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-028": {
+    "sku": "SPU-ISTY-028",
+    "name": "Cartridge Holder (cartridge, needle)",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-025": {
+    "sku": "SPU-ISTY-025",
+    "name": "Ink Box Rack Needle",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-027": {
+    "sku": "SPU-ISTY-027",
+    "name": "Connector",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-008": {
+    "sku": "SPU-OSTY-008",
+    "name": "Wire Connector",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-009": {
+    "sku": "SPU-OSTY-009",
+    "name": "Wire Connector",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-010": {
+    "sku": "SPU-OSTY-010",
+    "name": "Wire Connector",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-011": {
+    "sku": "SPU-OSTY-011",
+    "name": "Wire Connector",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "/": {
+    "sku": "/",
+    "name": "Wire harness",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-001": {
+    "sku": "SPU-OSTY-001",
+    "name": "9.0 rip 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-002": {
+    "sku": "SPU-OSTY-002",
+    "name": "9.0 VDP RIP 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young",
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-018": {
+    "sku": "SPU-OSTY-018",
+    "name": "Hinge hinge",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-034": {
+    "sku": "SPU-ISTY-034",
+    "name": "Rubber tube",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Young"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PBB3-001": {
+    "sku": "SPU-PBB3-001",
+    "name": "control panel board for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-CSB3-001": {
+    "sku": "SPU-CSB3-001",
+    "name": "3000U Pro Sensor Board S-J6 Harness",
+    "description": "1PC/Machine",
+    "system": "CABLING",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-CSTY-006": {
+    "sku": "SPU-CSTY-006",
+    "name": "Cable from UV Lamp to Power Supply",
+    "description": "1PC/Machine",
+    "system": "CABLING",
+    "models": [
+      "3000U_Pro",
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-CSTY-006-1": {
+    "sku": "SPU-CSTY-006-1",
+    "name": "Cable from UV Lamp to Power Supply",
+    "description": "1PC/Machine",
+    "system": "CABLING",
+    "models": [
+      "3000U_Pro",
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-USTY-002": {
+    "sku": "SPU-USTY-002",
+    "name": "UV Lamp Module Cooling system for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "3000U_Pro",
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-USTY-003": {
+    "sku": "SPU-USTY-003",
+    "name": "UV Lamp Dual Lamp Module for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "3000U_Pro",
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-USTY-004": {
+    "sku": "SPU-USTY-004",
+    "name": "UV Cooling Bottle for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-USTY-005": {
+    "sku": "SPU-USTY-005",
+    "name": "UV Cooling System Pump for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-USTY-008": {
+    "sku": "SPU-USTY-008",
+    "name": "UV Cooling System Pump",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-USTY-006": {
+    "sku": "SPU-USTY-006",
+    "name": "UV Cooling Tube",
+    "description": "2 PCS/set",
+    "system": "UV SYSTEM",
+    "models": [
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PSTY-003": {
+    "sku": "SPU-PSTY-003",
+    "name": "UV Power Supply CMYKW for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "POWER SUPPLY",
+    "models": [
+      "3000U_Pro",
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PSTY-004": {
+    "sku": "SPU-PSTY-004",
+    "name": "UV Power Supply Varnish for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "POWER SUPPLY",
+    "models": [
+      "3000U_Pro",
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PSTY-007": {
+    "sku": "SPU-PSTY-007",
+    "name": "Adsorption fan power supply",
+    "description": "1PC/Machine",
+    "system": "POWER SUPPLY",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTT-006": {
+    "sku": "SPU-OSTT-006",
+    "name": "Fan Regulator",
+    "description": "1PC/Machine",
+    "system": "POWER SUPPLY",
+    "models": [
+      "3000U_Pro",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-044": {
+    "sku": "SPU-ISTY-044",
+    "name": "drag chain",
+    "description": "1PC/Machine",
+    "system": "POWER SUPPLY",
+    "models": [
+      "3000U_Pro",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-023": {
+    "sku": "SPU-DMTY-023",
+    "name": "Z Axis Motor for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMB3-002": {
+    "sku": "SPU-DMB3-002",
+    "name": "Belt for CR Motor for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMB3-003": {
+    "sku": "SPU-DMB3-003",
+    "name": "Belt for Z scale for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMB3-008": {
+    "sku": "SPU-DMB3-008",
+    "name": "Belt for X scale for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMB3-004": {
+    "sku": "SPU-DMB3-004",
+    "name": "Slide for Y scale for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-002": {
+    "sku": "SPU-DMTY-002",
+    "name": "Y Scale Motor for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-003": {
+    "sku": "SPU-DMTY-003",
+    "name": "Carriage sliding block 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-SSB3-001": {
+    "sku": "SPU-SSB3-001",
+    "name": "Encoder Strip for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "SENSOR SYSTEM",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-SSB3-002": {
+    "sku": "SPU-SSB3-002",
+    "name": "Magnetic grid for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "SENSOR SYSTEM",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-006-2": {
+    "sku": "SPU-ISTY-006-2",
+    "name": "ink Tube for 3000U Pro",
+    "description": "4pcs*4M/roll",
+    "system": "INK SYSTEM",
+    "models": [
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-042": {
+    "sku": "SPU-ISTY-042",
+    "name": "Circulation pump for white ink",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "3000U_Pro",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-016": {
+    "sku": "SPU-ISTY-016",
+    "name": "Waste Ink Bottle for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSB3-001": {
+    "sku": "SPU-OSB3-001",
+    "name": "Front Acrylic Cover for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSB3-002": {
+    "sku": "SPU-OSB3-002",
+    "name": "Back Acrylic Cover 3000U PRO",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSB3-003": {
+    "sku": "SPU-OSB3-003",
+    "name": "hydraulic lever for 3000U",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSB3-004": {
+    "sku": "SPU-OSB3-004",
+    "name": "Table Matel for 3000U Pro",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSB3-006": {
+    "sku": "SPU-OSB3-006",
+    "name": "X-Guide Rail",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSB3-005": {
+    "sku": "SPU-OSB3-005",
+    "name": "BODY-COVER",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "CT-S001": {
+    "sku": "CT-S001",
+    "name": "Syringe",
+    "description": "1pcs/Package",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "CT-S002": {
+    "sku": "CT-S002",
+    "name": "Non-Woven Cloth",
+    "description": "150PCs/Package",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "CT-S004": {
+    "sku": "CT-S004",
+    "name": "Grease",
+    "description": "15ml/box",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "MA001": {
+    "sku": "MA001",
+    "name": "NC-TAPE",
+    "description": "1 Roll/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "MA003": {
+    "sku": "MA003",
+    "name": "E fixer-table Matt",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "MA002": {
+    "sku": "MA002",
+    "name": "Nozzle check template",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "MA007": {
+    "sku": "MA007",
+    "name": "Cleaning swabs",
+    "description": "50PCs/Package",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "MA008": {
+    "sku": "MA008",
+    "name": "Gloves",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISB3-003": {
+    "sku": "SPU-ISB3-003",
+    "name": "Head cover (head cap) 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-021": {
+    "sku": "SPU-OSTY-021",
+    "name": "Double cooling fan for3000U pro 5000U",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTY-019": {
+    "sku": "SPU-OSTY-019",
+    "name": "3000U pro 5000U Waste ink bottle bottom support",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "5000U",
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMB3-007": {
+    "sku": "SPU-DMB3-007",
+    "name": "Left side trolley belt synchro wheel for 3000U pro",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "3000U_Pro",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PBB2-001": {
+    "sku": "SPU-PBB2-001",
+    "name": "control panel board for artis 5000U",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-CSB2-002": {
+    "sku": "SPU-CSB2-002",
+    "name": "5000U Sensor Board S-J10 Harness",
+    "description": "1PC/Machine",
+    "system": "CABLING",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-CSB2-001": {
+    "sku": "SPU-CSB2-001",
+    "name": "5000U Main Board M-J29 Harness",
+    "description": "1PC/Machine",
+    "system": "CABLING",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMB2-002": {
+    "sku": "SPU-DMB2-002",
+    "name": "Belt for CR Motor for artis 5000U",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMB2-003": {
+    "sku": "SPU-DMB2-003",
+    "name": "Belt for Z scale for artis 5000U",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMB2-004": {
+    "sku": "SPU-DMB2-004",
+    "name": "Slide for Y scale for artis 5000U",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-008": {
+    "sku": "SPU-DMTY-008",
+    "name": "Right component of X axis",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-009": {
+    "sku": "SPU-DMTY-009",
+    "name": "Synchronous belt of X axis",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-025": {
+    "sku": "SPU-DMTY-025",
+    "name": "Synchronous wheel for Right component of X axis",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-026": {
+    "sku": "SPU-DMTY-026",
+    "name": "Synchronous wheel for Right component of X axis",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMTY-027": {
+    "sku": "SPU-DMTY-027",
+    "name": "Synchronous wheel  left side of the X-axis",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-DMB2-006": {
+    "sku": "SPU-DMB2-006",
+    "name": "Carriage sliding block 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-SSB2-001": {
+    "sku": "SPU-SSB2-001",
+    "name": "Encoder Strip for artis 5000U",
+    "description": "1PC/Machine",
+    "system": "SENSOR SYSTEM",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-SSB2-002": {
+    "sku": "SPU-SSB2-002",
+    "name": "Magnetic grid for artis 5000U",
+    "description": "1PC/Machine",
+    "system": "SENSOR SYSTEM",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSB2-001": {
+    "sku": "SPU-OSB2-001",
+    "name": "Front Acrylic Cover for 5000U 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSB2-002": {
+    "sku": "SPU-OSB2-002",
+    "name": "Back Acrylic Cover for 5000U 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSB2-003": {
+    "sku": "SPU-OSB2-003",
+    "name": "Table Matel for 5000U 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSB2-004": {
+    "sku": "SPU-OSB2-004",
+    "name": "BODY-COVER",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISTY-050": {
+    "sku": "SPU-ISTY-050",
+    "name": "Silicone tube for air valve",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-ISB2-001": {
+    "sku": "SPU-ISB2-001",
+    "name": "Ink TubeTank 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-OSTT-007": {
+    "sku": "SPU-OSTT-007",
+    "name": "Table for 5000U",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "5000U"
+    ],
+    "source": "2026_pricelist"
+  },
+  "SPU-PBTY-011": {
+    "sku": "SPU-PBTY-011",
+    "name": "Head Board for 3200",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-PBTT-001": {
+    "sku": "SPU-PBTT-001",
+    "name": "Control panel board for Trust",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Trust_6090"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-CSTY-014": {
+    "sku": "SPU-CSTY-014",
+    "name": "Head Cable for 3200",
+    "description": "4PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-CSTY-015": {
+    "sku": "SPU-CSTY-015",
+    "name": "Cable from UV Lamp to Power Supply",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-USTY-009": {
+    "sku": "SPU-USTY-009",
+    "name": "UV Lamp for 3200",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-OSTT-005": {
+    "sku": "SPU-OSTT-005",
+    "name": "Adsorption fan power supply",
+    "description": "1PC/Machine",
+    "system": "POWER SUPPLY",
+    "models": [
+      "Trust_6090"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-PSTY-006": {
+    "sku": "SPU-PSTY-006",
+    "name": "UV Power Supply for 3200",
+    "description": "1PC/Machine",
+    "system": "POWER SUPPLY",
+    "models": [
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-OSTT-004": {
+    "sku": "SPU-OSTT-004",
+    "name": "Platform adsorption fan",
+    "description": "1PC/Machine",
+    "system": "POWER SUPPLY",
+    "models": [
+      "Trust_6090"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-DMTT-001": {
+    "sku": "SPU-DMTT-001",
+    "name": "Belt for CR Motor for artis Trust",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Trust_6090"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-DMTT-002": {
+    "sku": "SPU-DMTT-002",
+    "name": "Belt for Z scale for artis Trust",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Trust_6090"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-DMTT-003": {
+    "sku": "SPU-DMTT-003",
+    "name": "for Y scale for artis Trust",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Trust_6090"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-ISTT-001": {
+    "sku": "SPU-ISTT-001",
+    "name": "Ink TubeTank 1PC/Machine",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS",
+    "models": [
+      "Trust_6090"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-SSTT-001": {
+    "sku": "SPU-SSTT-001",
+    "name": "Encoder Strip for artis Trust",
+    "description": "1PC/Machine",
+    "system": "SENSOR SYSTEM",
+    "models": [
+      "Trust_6090"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-SSTT-002": {
+    "sku": "SPU-SSTT-002",
+    "name": "Magnetic grid for artis Trust",
+    "description": "1PC/Machine",
+    "system": "SENSOR SYSTEM",
+    "models": [
+      "Trust_6090"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-ISTY-038": {
+    "sku": "SPU-ISTY-038",
+    "name": "cap top for 3200",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-ISTY-039": {
+    "sku": "SPU-ISTY-039",
+    "name": "Ink Service Station for3200",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-ISTY-040": {
+    "sku": "SPU-ISTY-040",
+    "name": "Wiper for 3200",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-ISTY-041": {
+    "sku": "SPU-ISTY-041",
+    "name": "Wiper Station for 3200",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Trust_6090",
+      "3000U_Pro_Freebird"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-ISTY-043": {
+    "sku": "SPU-ISTY-043",
+    "name": "2 Way type tube connector",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "Trust_6090"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-OSTT-001": {
+    "sku": "SPU-OSTT-001",
+    "name": "Front Acrylic Cover for Trust",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Trust_6090"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-OSTT-002": {
+    "sku": "SPU-OSTT-002",
+    "name": "Back Acrylic Cover for Trust",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Trust_6090"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-OSTT-003": {
+    "sku": "SPU-OSTT-003",
+    "name": "BODY-COVER",
+    "description": "1PC/Machine",
+    "system": "OTHER",
+    "models": [
+      "Trust_6090"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "SPU-ISTY-045": {
+    "sku": "SPU-ISTY-045",
+    "name": "Platform adsorption fan for3200 3000U pro",
+    "description": "1PC/Machine",
+    "system": "POWER SUPPLY",
+    "models": [
+      "3000U_Pro_Freebird"
+    ],
+    "source": "freebird_pricelist"
+  },
+  "YPB-01": {
+    "sku": "YPB-01",
+    "name": "Printer Main Board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YPB-02": {
+    "sku": "YPB-02",
+    "name": "Head Board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YPB-03": {
+    "sku": "YPB-03",
+    "name": "Sensor Board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YPB-04": {
+    "sku": "YPB-04",
+    "name": "control panel board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YPB-05": {
+    "sku": "YPB-05",
+    "name": "Head Cable",
+    "description": "2PC/Machine",
+    "system": "Boards",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YPB-06": {
+    "sku": "YPB-06",
+    "name": "Fiber Cable from Head Board to Main Board",
+    "description": "2PC/Machine",
+    "system": "Boards",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YPB-07": {
+    "sku": "YPB-07",
+    "name": "Flat Cable from Mail Board to Sensor Board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YUS-01": {
+    "sku": "YUS-01",
+    "name": "UV Lamp Module",
+    "description": "1PC/Machine",
+    "system": "UV syeterm",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YUS-02": {
+    "sku": "YUS-02",
+    "name": "UV Cooling System Pump",
+    "description": "1PC/Machine",
+    "system": "UV syeterm",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YUS-03": {
+    "sku": "YUS-03",
+    "name": "UV Cooling Bottle",
+    "description": "1PC/Machine",
+    "system": "UV syeterm",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YUS-04": {
+    "sku": "YUS-04",
+    "name": "UV Power Supply",
+    "description": "1PC/Machine",
+    "system": "UV syeterm",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YUS-05": {
+    "sku": "YUS-05",
+    "name": "Power Supply for Head Board",
+    "description": "1PC/Machine",
+    "system": "UV syeterm",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YUS-06": {
+    "sku": "YUS-06",
+    "name": "General Power Supply for Printer,24V",
+    "description": "1PC/Machine",
+    "system": "UV syeterm",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YDM-01": {
+    "sku": "YDM-01",
+    "name": "CR Motor",
+    "description": "1PC/Machine",
+    "system": "Driving Motors",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YDM-02": {
+    "sku": "YDM-02",
+    "name": "Y Scale Motor",
+    "description": "1PC/Machine",
+    "system": "Driving Motors",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YDM-03": {
+    "sku": "YDM-03",
+    "name": "Z Axis Motor",
+    "description": "1PC/Machine",
+    "system": "Driving Motors",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YS-01": {
+    "sku": "YS-01",
+    "name": "Sensor of Carriage",
+    "description": "2PC/Machine\nOne is on left and one is on right.",
+    "system": "Sensor of machine",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YS-02": {
+    "sku": "YS-02",
+    "name": "Sensor of Table for forward and backward",
+    "description": "2PC/Machine",
+    "system": "Sensor of machine",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YS-03": {
+    "sku": "YS-03",
+    "name": "Sensor of Table",
+    "description": "1PC/Machine",
+    "system": "Sensor of machine",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YS-04": {
+    "sku": "YS-04",
+    "name": "Height sensor of Table",
+    "description": "1SET(2PCS)/Machine",
+    "system": "Sensor of machine",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YS-05": {
+    "sku": "YS-05",
+    "name": "Encoder Strip",
+    "description": "1PC/Machine",
+    "system": "Sensor of machine",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YS-06": {
+    "sku": "YS-06",
+    "name": "Encoder Strip Sensor",
+    "description": "1PC/Machine",
+    "system": "Sensor of machine",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YIS-01": {
+    "sku": "YIS-01",
+    "name": "Tube",
+    "description": "4PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YIS-02": {
+    "sku": "YIS-02",
+    "name": "Ink cartridge with ink",
+    "description": "8PC/Machine/Set",
+    "system": "Ink System",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YIS-03": {
+    "sku": "YIS-03",
+    "name": "Waste ink cartridge",
+    "description": "3PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YIS-04": {
+    "sku": "YIS-04",
+    "name": "Ink Service Station",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YIS-05": {
+    "sku": "YIS-05",
+    "name": "Ink Pump",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YIS-06": {
+    "sku": "YIS-06",
+    "name": "Air Pump",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YIS-07": {
+    "sku": "YIS-07",
+    "name": "Cap top",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YIS-08": {
+    "sku": "YIS-08",
+    "name": "Wiper Station",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "YIS-10": {
+    "sku": "YIS-10",
+    "name": "Damper",
+    "description": "4PC/Machine/Set",
+    "system": "Ink System",
+    "models": [
+      "Young"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-PB-01": {
+    "sku": "UA3P-PB-01",
+    "name": "Printer Main Board",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-PB-02": {
+    "sku": "UA3P-PB-02",
+    "name": "Head Board",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-PB-03": {
+    "sku": "UA3P-PB-03",
+    "name": "Sensor Board",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-PB-04": {
+    "sku": "UA3P-PB-04",
+    "name": "Control Panel Board",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-CP-01": {
+    "sku": "UA3P-CP-01",
+    "name": "Head Cable",
+    "description": "2PCs/Machine",
+    "system": "CABLING",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-CP-02": {
+    "sku": "UA3P-CP-02",
+    "name": "Fiber Cable from Head Board to Main Board",
+    "description": "2PCs/Machine",
+    "system": "CABLING",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-CP-03": {
+    "sku": "UA3P-CP-03",
+    "name": "Flat Cable from Mail Board to Sensor Board",
+    "description": "1PC/Machine",
+    "system": "CABLING",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-UV-01": {
+    "sku": "UA3P-UV-01",
+    "name": "UV Lamp Module for CMYKW",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-UV-05": {
+    "sku": "UA3P-UV-05",
+    "name": "UV Power Supply  120V\nFor Varnish Light",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-UV-04": {
+    "sku": "UA3P-UV-04",
+    "name": "UV Lamp Dual Lamp Module",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-UV-02": {
+    "sku": "UA3P-UV-02",
+    "name": "UV Cooling System Pump\n and Bottle",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-UV-03": {
+    "sku": "UA3P-UV-03",
+    "name": "UV Power Supply for CMYKW",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-DM-01": {
+    "sku": "UA3P-DM-01",
+    "name": "CR Motor",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS & BELTS",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-DM-02": {
+    "sku": "UA3P-DM-02",
+    "name": "Y Scale Motor",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS & BELTS",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-DM-03": {
+    "sku": "UA3P-DM-03",
+    "name": "Belt for CR Motor",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS & BELTS",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-DM-04": {
+    "sku": "UA3P-DM-04",
+    "name": "Encoder Strip",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS & BELTS",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-ES-01": {
+    "sku": "UA3P-ES-01",
+    "name": "Encoder Strip Sensor",
+    "description": "1PC/Machine",
+    "system": "SENSORS",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-ES-02": {
+    "sku": "UA3P-ES-02",
+    "name": "Sensor of Carriage",
+    "description": "2PCs/Machine\nOne is on left and one is on right.",
+    "system": "SENSORS",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-ES-03": {
+    "sku": "UA3P-ES-03",
+    "name": "Sensor of Table for forward and backward",
+    "description": "2PCs/Machine",
+    "system": "SENSORS",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-ES-04": {
+    "sku": "UA3P-ES-04",
+    "name": "Sensor of Table down-wards",
+    "description": "1PC/Machine",
+    "system": "SENSORS",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-ES-05": {
+    "sku": "UA3P-ES-05",
+    "name": "Sensor of Table up-wards",
+    "description": "1SET(2PCs)/Machine",
+    "system": "SENSORS",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-IS-01": {
+    "sku": "UA3P-IS-01",
+    "name": "Ink Dampers",
+    "description": "4PCs/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-IS-02": {
+    "sku": "UA3P-IS-02",
+    "name": "Ink Tubes",
+    "description": "8PCs/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-IS-03": {
+    "sku": "UA3P-IS-03",
+    "name": "Empty Ink Cartridges",
+    "description": "8PCs/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-IS-04": {
+    "sku": "UA3P-IS-04",
+    "name": "Ink Service Station",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-IS-05": {
+    "sku": "UA3P-IS-05",
+    "name": "Wipping station",
+    "description": "1Pc/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-IS-06": {
+    "sku": "UA3P-IS-06",
+    "name": "Ink Pump",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3P-IS-07": {
+    "sku": "UA3P-IS-07",
+    "name": "Air Pump",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "3000U_Pro"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPB-01": {
+    "sku": "U1PPB-01",
+    "name": "Printer Main Board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPB-02": {
+    "sku": "U1PPB-02",
+    "name": "Head Board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPB-03": {
+    "sku": "U1PPB-03",
+    "name": "Sensor Board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPB-04": {
+    "sku": "U1PPB-04",
+    "name": "control panel board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPB-05": {
+    "sku": "U1PPB-05",
+    "name": "Head Cable",
+    "description": "2PC/Machine",
+    "system": "Boards",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPB-06": {
+    "sku": "U1PPB-06",
+    "name": "Fiber Cable from Head Board to Main Board",
+    "description": "2PC/Machine",
+    "system": "Boards",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPB-07": {
+    "sku": "U1PPB-07",
+    "name": "Flat Cable from Mail Board to Sensor Board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPB-08": {
+    "sku": "U1PPB-08",
+    "name": "Flexiable cable for head board",
+    "description": "1PC/Machine/1.5M",
+    "system": "Boards",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPI-01": {
+    "sku": "U1PPI-01",
+    "name": "UV Lamp Module(single)",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPI-02": {
+    "sku": "U1PPI-02",
+    "name": "UV Cooling System Pump",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPI-03": {
+    "sku": "U1PPI-03",
+    "name": "UV Cooling Bottle",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPI-04": {
+    "sku": "U1PPI-04",
+    "name": "UV Power Supply",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPI-05": {
+    "sku": "U1PPI-05",
+    "name": "Power Supply for Head Board",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPI-06": {
+    "sku": "U1PPI-06",
+    "name": "General Power Supply for Printer,24V",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPI-07": {
+    "sku": "U1PPI-07",
+    "name": "CR Rail block",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPI-08": {
+    "sku": "U1PPI-08",
+    "name": "CR Motor",
+    "description": "1PC/Machine",
+    "system": "Driving Motors",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPI-09": {
+    "sku": "U1PPI-09",
+    "name": "Y Scale Motor",
+    "description": "1PC/Machine",
+    "system": "Driving Motors",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPI-10": {
+    "sku": "U1PPI-10",
+    "name": "Z Axis Motor",
+    "description": "1PC/Machine",
+    "system": "Driving Motors",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1PPI-11": {
+    "sku": "U1PPI-11",
+    "name": "Pulley for CR Motor",
+    "description": "1PC/Machine",
+    "system": "Driving Motors",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1MPC-01": {
+    "sku": "U1MPC-01",
+    "name": "Belt for CR Motor",
+    "description": "1PC/Machine",
+    "system": "Driving Motors",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1MPC-02": {
+    "sku": "U1MPC-02",
+    "name": "Encoder Strip",
+    "description": "1PC/Machine",
+    "system": "Driving Motors",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1MPC-03": {
+    "sku": "U1MPC-03",
+    "name": "Encoder Strip Sensor",
+    "description": "1PC/Machine",
+    "system": "Driving Motors",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1MPP-01": {
+    "sku": "U1MPP-01",
+    "name": "Sensor of Carriage",
+    "description": "2PC/Machine\nOne is on left and one is on right.",
+    "system": "Mechanical Printer Parts",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1MPP-02": {
+    "sku": "U1MPP-02",
+    "name": "Sensor of Table for forward and backward",
+    "description": "2PC/Machine",
+    "system": "Mechanical Printer Parts",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1MPP-03": {
+    "sku": "U1MPP-03",
+    "name": "Sensor of Table",
+    "description": "1PC/Machine",
+    "system": "Mechanical Printer Parts",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1MPP-04": {
+    "sku": "U1MPP-04",
+    "name": "Sensor of Carriage(Right and",
+    "description": "2PC/Machine",
+    "system": "Mechanical Printer Parts",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1MPP-05": {
+    "sku": "U1MPP-05",
+    "name": "Height sensor of Table",
+    "description": "1SET(2PCS)/Machine",
+    "system": "Mechanical Printer Parts",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1MPP-06": {
+    "sku": "U1MPP-06",
+    "name": "Damper",
+    "description": "4PC/Machine",
+    "system": "Mechanical Printer Parts",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1UVP-01": {
+    "sku": "U1UVP-01",
+    "name": "Tube",
+    "description": "8PC/Machine",
+    "system": "UV System",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1UVP-02": {
+    "sku": "U1UVP-02",
+    "name": "Ink bottles",
+    "description": "6PC/Machine",
+    "system": "UV System",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1UVP-03": {
+    "sku": "U1UVP-03",
+    "name": "Ink Service Station",
+    "description": "1PC/Machine",
+    "system": "UV System",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1UVP-04": {
+    "sku": "U1UVP-04",
+    "name": "Ink Pump",
+    "description": "1PC/Machine",
+    "system": "UV System",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1UVP-05": {
+    "sku": "U1UVP-05",
+    "name": "Air Pump",
+    "description": "1PC/Machine",
+    "system": "UV System",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1UVP-07": {
+    "sku": "U1UVP-07",
+    "name": "cap top",
+    "description": "1PC/Machine",
+    "system": "UV System",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U1CP-01": {
+    "sku": "U1CP-01",
+    "name": "Wiper Station",
+    "description": "1PC/Machine",
+    "system": "UV System",
+    "models": [
+      "5000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-PB-01": {
+    "sku": "UA4-PB-01",
+    "name": "Printer Main Board",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-PB-02": {
+    "sku": "UA4-PB-02",
+    "name": "Control Board",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-PB-03": {
+    "sku": "UA4-PB-03",
+    "name": "SCM Board",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-PB-04": {
+    "sku": "UA4-PB-04",
+    "name": "Transfer Board",
+    "description": "1PC/Machine",
+    "system": "BOARDS",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-CP-01": {
+    "sku": "UA4-CP-01",
+    "name": "Head Cable",
+    "description": "2PCs/Machine",
+    "system": "CABLING",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-CP-02": {
+    "sku": "UA4-CP-02",
+    "name": "Cable from Main Board to Transfer Board",
+    "description": "2PCs/Machine",
+    "system": "CABLING",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-CP-03": {
+    "sku": "UA4-CP-03",
+    "name": "Cable from SCM to Encoder Disk Sensor",
+    "description": "1PC/Machine",
+    "system": "CABLING",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-CP-04": {
+    "sku": "UA4-CP-04",
+    "name": "Cable from SCM to Transfer Board",
+    "description": "1PC/Machine",
+    "system": "CABLING",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-CP-05": {
+    "sku": "UA4-CP-05",
+    "name": "Cable from SCM to Main Board",
+    "description": "3PCs/Machine",
+    "system": "CABLING",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-UV-01": {
+    "sku": "UA4-UV-01",
+    "name": "UV Lamp Module",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-UV-02": {
+    "sku": "UA4-UV-02",
+    "name": "UV Cooling System Pump",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-UV-03": {
+    "sku": "UA4-UV-03",
+    "name": "UV Power Supply",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-UV-04": {
+    "sku": "UA4-UV-04",
+    "name": "UV Cooling Bottle",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-UV-05": {
+    "sku": "UA4-UV-05",
+    "name": "UV liquid tube include connector",
+    "description": "3PCs/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-UV-06": {
+    "sku": "UA4-UV-06",
+    "name": "UV cooling system Fans",
+    "description": "1PC/Machine",
+    "system": "UV SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-DM-01": {
+    "sku": "UA4-DM-01",
+    "name": "CR Motor",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS & BELTS",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-DM-02": {
+    "sku": "UA4-DM-02",
+    "name": "Y Scale Motor",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS & BELTS",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-DM-03": {
+    "sku": "UA4-DM-03",
+    "name": "Z Axis Motor",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS & BELTS",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-DM-04": {
+    "sku": "UA4-DM-04",
+    "name": "Encoder Strip",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS & BELTS",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-DM-05": {
+    "sku": "UA4-DM-05",
+    "name": "Timing Belt",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS & BELTS",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-DM-06": {
+    "sku": "UA4-DM-06",
+    "name": "Encoder Disk",
+    "description": "1PC/Machine",
+    "system": "DRIVING MOTORS & BELTS",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-ES-01": {
+    "sku": "UA4-ES-01",
+    "name": "Encoder Strip Sensor",
+    "description": "1PC/Machine",
+    "system": "SENSORS",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-ES-02": {
+    "sku": "UA4-ES-02",
+    "name": "Encoder Disk Sensor",
+    "description": "1PC/Machine",
+    "system": "SENSORS",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-IS-01": {
+    "sku": "UA4-IS-01",
+    "name": "Ink Bottles with Filters",
+    "description": "5PCs/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-IS-02": {
+    "sku": "UA4-IS-02",
+    "name": "Ink filter from tube to bottle",
+    "description": "6PCS/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-IS-03": {
+    "sku": "UA4-IS-03",
+    "name": "Ink Tubes 3*2 with codes/Tank",
+    "description": "6PCs/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-IS-04": {
+    "sku": "UA4-IS-04",
+    "name": "Ink Dampers",
+    "description": "6PCs/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-IS-06": {
+    "sku": "UA4-IS-06",
+    "name": "Ink Cap top",
+    "description": "1Pc/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-IS-07": {
+    "sku": "UA4-IS-07",
+    "name": "Ink Pump with extended tubes",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-IS-08": {
+    "sku": "UA4-IS-08",
+    "name": "Wiper",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-IS-09": {
+    "sku": "UA4-IS-09",
+    "name": "Waste Ink Bottle",
+    "description": "1Pc/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-IS-10": {
+    "sku": "UA4-IS-10",
+    "name": "Carriage cart",
+    "description": "1PC/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-IS-11": {
+    "sku": "UA4-IS-11",
+    "name": "Ink Tubes",
+    "description": "6PCs/Machine",
+    "system": "INK SYSTEM",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-PS-01": {
+    "sku": "UA4-PS-01",
+    "name": "Power for Main Board Supply",
+    "description": "1PC/Machine",
+    "system": "POWER SUPPLY",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-PS-02": {
+    "sku": "UA4-PS-02",
+    "name": "Power Supply for Cooling Motor and UV Fans",
+    "description": "1PC/Machine",
+    "system": "POWER SUPPLY",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-PS-03": {
+    "sku": "UA4-PS-03",
+    "name": "Power Supply for Ink Pump and Y-Motor-01",
+    "description": "1PC/Machine",
+    "system": "POWER SUPPLY",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA4-PS-04": {
+    "sku": "UA4-PS-04",
+    "name": "Power Supply for SCM",
+    "description": "1PC/Machine",
+    "system": "POWER SUPPLY",
+    "models": [
+      "2100U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPB-01": {
+    "sku": "UA3PPB-01",
+    "name": "Printer Main Board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPB-02": {
+    "sku": "UA3PPB-02",
+    "name": "Printer Power Board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPB-03": {
+    "sku": "UA3PPB-03",
+    "name": "UV Lamp Control Board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPB-04": {
+    "sku": "UA3PPB-04",
+    "name": "CSIC  Board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPB-05": {
+    "sku": "UA3PPB-05",
+    "name": "Chip board",
+    "description": "8PCs/Set. Color/Each",
+    "system": "Boards",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPB-06": {
+    "sku": "UA3PPB-06",
+    "name": "Control Board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPB-07": {
+    "sku": "UA3PPB-07",
+    "name": "SCM Board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPB-08": {
+    "sku": "UA3PPB-08",
+    "name": "Chip transfer board",
+    "description": "1PC/Machine",
+    "system": "Boards",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPI-01": {
+    "sku": "UA3PPI-01",
+    "name": "Ink Bottles with filters",
+    "description": "6PCs/Set. Color/Each",
+    "system": "Ink System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPI-02": {
+    "sku": "UA3PPI-02",
+    "name": "Ink Tubes 3*2 with codes/Tank",
+    "description": "8PCs/Set. Color/Each",
+    "system": "Ink System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPI-03": {
+    "sku": "UA3PPI-03",
+    "name": "Ink Dampers",
+    "description": "8PCs/Set. Color/Each",
+    "system": "Ink System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPI-05": {
+    "sku": "UA3PPI-05",
+    "name": "Captop",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPI-06": {
+    "sku": "UA3PPI-06",
+    "name": "Ink Pump",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPI-07": {
+    "sku": "UA3PPI-07",
+    "name": "Ink filter from tube to bottle",
+    "description": "8PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPI-08": {
+    "sku": "UA3PPI-08",
+    "name": "Wiper",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPI-09": {
+    "sku": "UA3PPI-09",
+    "name": "Waste Ink Bottle",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPI-10": {
+    "sku": "UA3PPI-10",
+    "name": "Carriage cart with encoder strip cables",
+    "description": "1PC/Machine",
+    "system": "Ink System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3PPI-11": {
+    "sku": "UA3PPI-11",
+    "name": "ink tube",
+    "description": "8PCs/Set. Color/Each",
+    "system": "Ink System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3MPC-01": {
+    "sku": "UA3MPC-01",
+    "name": "CR Motor",
+    "description": "1PC/Machine",
+    "system": "Driving Motors",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3MPC-02": {
+    "sku": "UA3MPC-02",
+    "name": "Z Axis Motor",
+    "description": "1PC/Machine",
+    "system": "Driving Motors",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3MPC-03": {
+    "sku": "UA3MPC-03",
+    "name": "Y Scale Motor",
+    "description": "1PC/Machine",
+    "system": "Driving Motors",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3MPC-04": {
+    "sku": "UA3MPC-04",
+    "name": "Carriage Up-Down Gear Group Unit",
+    "description": "1PC/Machine",
+    "system": "Driving Motors",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3MPP-01": {
+    "sku": "UA3MPP-01",
+    "name": "Encoder Strip",
+    "description": "1PC/Machine",
+    "system": "Mechanical Printer Parts",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3MPP-02": {
+    "sku": "UA3MPP-02",
+    "name": "Head Cable (CN11，CN12，CN13，CN14)",
+    "description": "1SET(2pcs)/Machine",
+    "system": "Mechanical Printer Parts",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3MPP-03": {
+    "sku": "UA3MPP-03",
+    "name": "Encoder Disk",
+    "description": "1PC/Machine",
+    "system": "Mechanical Printer Parts",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3MPP-04": {
+    "sku": "UA3MPP-04",
+    "name": "Height sensor",
+    "description": "1Set/Machine",
+    "system": "Mechanical Printer Parts",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3MPP-05": {
+    "sku": "UA3MPP-05",
+    "name": "Encoder Disk Sensor",
+    "description": "1PC/Machine",
+    "system": "Mechanical Printer Parts",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3MPP-06": {
+    "sku": "UA3MPP-06",
+    "name": "Flatbed Sliding Rail",
+    "description": "1SET(2pcs)/Machine",
+    "system": "Mechanical Printer Parts",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3MPP-07": {
+    "sku": "UA3MPP-07",
+    "name": "Flatbed Rack Bar",
+    "description": "1PC/Machine",
+    "system": "Mechanical Printer Parts",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3MPP-08": {
+    "sku": "UA3MPP-08",
+    "name": "Flatbed Table",
+    "description": "1PC/Machine",
+    "system": "Mechanical Printer Parts",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3UVP-01": {
+    "sku": "UA3UVP-01",
+    "name": "UV Lamp Module",
+    "description": "1PC/Machine",
+    "system": "UV System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3UVP-02": {
+    "sku": "UA3UVP-02",
+    "name": "UV Cooling System Pump",
+    "description": "1PC/Machine",
+    "system": "UV System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3UVP-03": {
+    "sku": "UA3UVP-03",
+    "name": "UV Power Supply",
+    "description": "1PC/Machine",
+    "system": "UV System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3UVP-04": {
+    "sku": "UA3UVP-04",
+    "name": "UV Cooling Bottle",
+    "description": "1PC/Machine",
+    "system": "UV System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3UVP-05": {
+    "sku": "UA3UVP-05",
+    "name": "UV liquid tube include connector",
+    "description": "2PC/Machine\n2.5M/PC and 1.5M/PC",
+    "system": "UV System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "UA3UVP-06": {
+    "sku": "UA3UVP-06",
+    "name": "UV cooling system Fans",
+    "description": "1PC/Machine",
+    "system": "UV System",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U3CP-01": {
+    "sku": "U3CP-01",
+    "name": "Main board to SCM(CN5 11P,CN9 15P)",
+    "description": "2PC/Machine",
+    "system": "Cabling",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U3CP-02": {
+    "sku": "U3CP-02",
+    "name": "Main board to CSIC Board(CN8 10P)",
+    "description": "1PC/Machine",
+    "system": "Cabling",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U3CP-03": {
+    "sku": "U3CP-03",
+    "name": "Main board to Chip transfer board(CN10 15P)",
+    "description": "1PC/Machine",
+    "system": "Cabling",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  },
+  "U3CP-04": {
+    "sku": "U3CP-04",
+    "name": "CSIC to SCM (11P)",
+    "description": "1PC/Machine",
+    "system": "Cabling",
+    "models": [
+      "3000U"
+    ],
+    "source": "2022_internal"
+  }
+}

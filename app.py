@@ -37,81 +37,172 @@ WOOCOMMERCE_SHOPS = {
     }
 }
 
+# WooCommerce category IDs by model — for targeted browsing
+WC_CATEGORIES = {
+    "es": {
+        "Young": 89, "3000U_Pro": 90, "3000U": 88, "5000U": 91,
+        "2100U": 87, "Trust_6090": 260, "Proud": 340, "Freebird": 340,
+        "MBO": 92, "otras": 92
+    },
+    "eu": {
+        "Young": 52, "3000U_Pro": 50, "3000U": 48, "5000U": 51,
+        "2100U": 47, "Trust_6090": 130, "Proud": 129, "Freebird": 129,
+        "MBO": 54, "otras": 54
+    }
+}
+
+# Load parts index for SKU-based search
+_parts_index_path = os.path.join(os.path.dirname(__file__), "parts_index.json")
+PARTS_INDEX = {}
+try:
+    with open(_parts_index_path, "r", encoding="utf-8") as f:
+        PARTS_INDEX = json.load(f)
+except Exception:
+    pass  # Will work without it, just no SKU matching
+
 # Rate limiting simple (por IP)
 request_counts = {}
 MAX_REQUESTS_PER_HOUR = int(os.environ.get("MAX_REQUESTS_PER_HOUR", 30))
 
 
-def _wc_search(shop, query, per_page=6):
-    """Single WooCommerce search request."""
-    resp = http_requests.get(
-        f"{shop['url']}/products",
-        params={
-            "search": query,
-            "per_page": per_page,
-            "status": "publish",
-            "consumer_key": shop["consumer_key"],
-            "consumer_secret": shop["consumer_secret"],
-        },
-        timeout=10
-    )
+def _wc_request(shop, params, per_page=6):
+    """Single WooCommerce API request."""
+    params.update({
+        "per_page": per_page,
+        "status": "publish",
+        "consumer_key": shop["consumer_key"],
+        "consumer_secret": shop["consumer_secret"],
+    })
+    resp = http_requests.get(f"{shop['url']}/products", params=params, timeout=10)
     resp.raise_for_status()
     return resp.json()
 
 
-def search_woocommerce(query, region="es", per_page=6):
-    """Search products on the appropriate WooCommerce shop.
-    Uses progressive query simplification: if the full query returns no results,
-    tries with fewer words until results are found.
+def _format_products(raw_products):
+    """Format raw WooCommerce products into our standard format."""
+    products = []
+    seen_ids = set()
+    for p in raw_products:
+        pid = p.get("id")
+        if pid in seen_ids:
+            continue
+        seen_ids.add(pid)
+        img = p["images"][0]["src"] if p.get("images") else ""
+        img_thumb = img.replace(".jpg", "-300x300.jpg").replace(".jpeg", "-300x300.jpeg").replace(".png", "-300x300.png") if img else ""
+        products.append({
+            "name": p.get("name", ""),
+            "sku": p.get("sku", ""),
+            "price": p.get("price", ""),
+            "currency": "€",
+            "url": p.get("permalink", ""),
+            "image": img_thumb,
+            "image_full": img,
+            "categories": [c["name"] for c in p.get("categories", [])],
+        })
+    return products
+
+
+def _find_skus_for_part(part_name, model=None):
+    """Find matching SKUs from parts_index for a given part name and optional model."""
+    if not PARTS_INDEX:
+        return []
+    part_lower = part_name.lower()
+    matches = []
+    for sku, info in PARTS_INDEX.items():
+        name_lower = info["name"].lower()
+        if part_lower in name_lower or name_lower in part_lower:
+            if model:
+                # Check if this SKU is for the right model
+                model_lower = model.lower().replace(" ", "_")
+                if any(model_lower in m.lower() for m in info["models"]):
+                    matches.insert(0, sku)  # Priority
+                else:
+                    matches.append(sku)
+            else:
+                matches.append(sku)
+    return matches[:5]
+
+
+def search_woocommerce(query, region="es", per_page=6, model=None):
+    """Search products using multiple strategies:
+    1. SKU search (if query looks like a SKU or matches parts_index)
+    2. Category-filtered search (if model is specified)
+    3. Text search with progressive simplification
+    4. Category browsing as fallback
     """
     shop = WOOCOMMERCE_SHOPS.get(region, WOOCOMMERCE_SHOPS["es"])
+    categories = WC_CATEGORIES.get(region, WC_CATEGORIES["es"])
+    all_results = []
+
     try:
-        # Strip common words that WooCommerce doesn't handle well
-        noise_words = {'artisjet', 'artis', 'mbo', 'impresora', 'printer', 'para', 'for', 'de', 'the', 'pro', 'uv', 'led'}
-
-        # Build search attempts: full query first, then progressively simpler
+        noise_words = {
+            'artisjet', 'artis', 'mbo', 'impresora', 'printer', 'para',
+            'for', 'de', 'the', 'pro', 'uv', 'led', 'mi', 'my', 'una',
+            'un', 'el', 'la', 'los', 'las', 'del', 'con', 'como', 'how'
+        }
         words = query.strip().split()
-        core_words = [w for w in words if w.lower() not in noise_words]
+        core_words = [w for w in words if w.lower() not in noise_words and len(w) >= 2]
 
-        attempts = [query]  # Try original first
-        if core_words and ' '.join(core_words) != query:
-            attempts.append(' '.join(core_words))  # Try without noise words
-        # Try each core word individually if multiple
-        if len(core_words) > 1:
-            for w in core_words:
-                if len(w) >= 3:  # Skip very short words
-                    attempts.append(w)
+        # --- Strategy 1: SKU-based search ---
+        # Check if query IS a SKU
+        if query.upper().startswith(("SPU-", "YPB-", "YIS-", "UA3", "UA4", "U1")):
+            results = _wc_request(shop, {"sku": query}, per_page)
+            if results:
+                all_results.extend(results)
 
-        raw_products = []
-        for attempt in attempts:
-            raw_products = _wc_search(shop, attempt, per_page)
-            if raw_products:
-                break
+        # Find SKUs from parts_index matching the part name
+        if not all_results:
+            skus = _find_skus_for_part(' '.join(core_words), model)
+            for sku in skus[:3]:
+                results = _wc_request(shop, {"sku": sku}, per_page=2)
+                all_results.extend(results)
 
-        products = []
-        seen_ids = set()
-        for p in raw_products:
-            pid = p.get("id")
-            if pid in seen_ids:
-                continue
-            seen_ids.add(pid)
-            img = p["images"][0]["src"] if p.get("images") else ""
-            # Use thumbnail size if available
-            if img:
-                img_thumb = img.replace(".jpg", "-300x300.jpg").replace(".jpeg", "-300x300.jpeg").replace(".png", "-300x300.png")
+        # --- Strategy 2: Category-filtered text search ---
+        if model and len(all_results) < per_page:
+            # Map model name to category ID
+            cat_id = None
+            model_upper = model.upper().replace(" ", "_")
+            for cat_name, cid in categories.items():
+                if cat_name.upper() in model_upper or model_upper in cat_name.upper():
+                    cat_id = cid
+                    break
+            if not cat_id and "MBO" in model_upper:
+                cat_id = categories.get("MBO") or categories.get("otras")
+
+            if cat_id:
+                search_term = ' '.join(core_words) if core_words else query
+                results = _wc_request(shop, {"search": search_term, "category": str(cat_id)}, per_page)
+                all_results.extend(results)
+
+                # If still nothing, browse the whole category
+                if not all_results:
+                    results = _wc_request(shop, {"category": str(cat_id), "orderby": "title", "order": "asc"}, per_page=20)
+                    # Filter locally by matching keywords
+                    for p in results:
+                        combined_text = f"{p.get('name','')} {p.get('short_description','')} {p.get('sku','')}".lower()
+                        if any(w.lower() in combined_text for w in core_words):
+                            all_results.append(p)
+
+        # --- Strategy 3: Progressive text search (no category filter) ---
+        if len(all_results) < per_page:
+            attempts = []
+            if core_words:
+                attempts.append(' '.join(core_words))
+                if len(core_words) > 1:
+                    for w in core_words:
+                        if len(w) >= 3:
+                            attempts.append(w)
             else:
-                img_thumb = ""
-            products.append({
-                "name": p.get("name", ""),
-                "sku": p.get("sku", ""),
-                "price": p.get("price", ""),
-                "currency": "€",
-                "url": p.get("permalink", ""),
-                "image": img_thumb,
-                "image_full": img,
-                "categories": [c["name"] for c in p.get("categories", [])],
-            })
-        return products[:per_page]
+                attempts.append(query)
+
+            for attempt in attempts:
+                results = _wc_request(shop, {"search": attempt}, per_page)
+                if results:
+                    all_results.extend(results)
+                    break
+
+        return _format_products(all_results)[:per_page]
+
     except Exception as e:
         app.logger.error(f"WooCommerce search error: {e}")
         return []
@@ -126,19 +217,25 @@ PRODUCT_SEARCH_TOOL = {
             "Busca productos, recambios, piezas o consumibles en la tienda online de Bomedia. "
             "Usa esta función cuando el usuario pregunte por una pieza, repuesto, tinta, cabezal, "
             "damper, placa, sensor, cable, o cualquier producto que pueda comprarse. "
-            "También cuando pregunte dónde comprar algo o cuánto cuesta."
+            "También cuando pregunte dónde comprar algo o cuánto cuesta. "
+            "IMPORTANTE: usa queries CORTAS de 1-2 palabras (ej: 'damper', 'captop', 'tinta'). "
+            "Nunca incluyas la marca ni el modelo en la query — usa el parámetro 'model' para eso."
         ),
         "parameters": {
             "type": "object",
             "properties": {
                 "query": {
                     "type": "string",
-                    "description": "Término de búsqueda del producto (ej: 'damper', 'cabezal xp600', 'tinta cyan', 'captop Proud')"
+                    "description": "Término de búsqueda CORTO: solo el nombre de la pieza (ej: 'damper', 'captop', 'cabezal', 'tinta cyan', 'wiper', 'main board', 'sensor board')"
                 },
                 "region": {
                     "type": "string",
                     "enum": ["es", "eu"],
                     "description": "Región del cliente: 'es' para España (boprint.net), 'eu' para resto de Europa (artisjet-printers.eu)"
+                },
+                "model": {
+                    "type": "string",
+                    "description": "Modelo de impresora del usuario. Ej: 'Young', '3000U_Pro', '5000U', '2100U', 'Trust_6090', 'Proud', 'Freebird', 'MBO'. Ayuda a filtrar por la categoría correcta de recambios."
                 }
             },
             "required": ["query", "region"]
@@ -293,7 +390,8 @@ def chat():
                         args = json.loads(tool_call.function.arguments)
                         query = args.get("query", "")
                         region = args.get("region", user_region)
-                        products = search_woocommerce(query, region)
+                        model = args.get("model", None)
+                        products = search_woocommerce(query, region, model=model)
                         products_found.extend(products)
 
                         # Return results to the assistant so it can reference them
