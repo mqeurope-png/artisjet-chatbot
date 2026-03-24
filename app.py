@@ -42,30 +42,65 @@ request_counts = {}
 MAX_REQUESTS_PER_HOUR = int(os.environ.get("MAX_REQUESTS_PER_HOUR", 30))
 
 
+def _wc_search(shop, query, per_page=6):
+    """Single WooCommerce search request."""
+    resp = http_requests.get(
+        f"{shop['url']}/products",
+        params={
+            "search": query,
+            "per_page": per_page,
+            "status": "publish",
+            "consumer_key": shop["consumer_key"],
+            "consumer_secret": shop["consumer_secret"],
+        },
+        timeout=10
+    )
+    resp.raise_for_status()
+    return resp.json()
+
+
 def search_woocommerce(query, region="es", per_page=6):
-    """Search products on the appropriate WooCommerce shop."""
+    """Search products on the appropriate WooCommerce shop.
+    Uses progressive query simplification: if the full query returns no results,
+    tries with fewer words until results are found.
+    """
     shop = WOOCOMMERCE_SHOPS.get(region, WOOCOMMERCE_SHOPS["es"])
     try:
-        resp = http_requests.get(
-            f"{shop['url']}/products",
-            params={
-                "search": query,
-                "per_page": per_page,
-                "status": "publish",
-                "consumer_key": shop["consumer_key"],
-                "consumer_secret": shop["consumer_secret"],
-            },
-            timeout=10
-        )
-        resp.raise_for_status()
+        # Strip common words that WooCommerce doesn't handle well
+        noise_words = {'artisjet', 'artis', 'mbo', 'impresora', 'printer', 'para', 'for', 'de', 'the', 'pro', 'uv', 'led'}
+
+        # Build search attempts: full query first, then progressively simpler
+        words = query.strip().split()
+        core_words = [w for w in words if w.lower() not in noise_words]
+
+        attempts = [query]  # Try original first
+        if core_words and ' '.join(core_words) != query:
+            attempts.append(' '.join(core_words))  # Try without noise words
+        # Try each core word individually if multiple
+        if len(core_words) > 1:
+            for w in core_words:
+                if len(w) >= 3:  # Skip very short words
+                    attempts.append(w)
+
+        raw_products = []
+        for attempt in attempts:
+            raw_products = _wc_search(shop, attempt, per_page)
+            if raw_products:
+                break
+
         products = []
-        for p in resp.json():
+        seen_ids = set()
+        for p in raw_products:
+            pid = p.get("id")
+            if pid in seen_ids:
+                continue
+            seen_ids.add(pid)
             img = p["images"][0]["src"] if p.get("images") else ""
             # Use thumbnail size if available
-            if img and "srcset" not in str(p["images"][0]):
-                img_thumb = img.replace(".jpg", "-300x200.jpg").replace(".jpeg", "-300x200.jpeg").replace(".png", "-300x200.png")
+            if img:
+                img_thumb = img.replace(".jpg", "-300x300.jpg").replace(".jpeg", "-300x300.jpeg").replace(".png", "-300x300.png")
             else:
-                img_thumb = img
+                img_thumb = ""
             products.append({
                 "name": p.get("name", ""),
                 "sku": p.get("sku", ""),
@@ -76,7 +111,7 @@ def search_woocommerce(query, region="es", per_page=6):
                 "image_full": img,
                 "categories": [c["name"] for c in p.get("categories", [])],
             })
-        return products
+        return products[:per_page]
     except Exception as e:
         app.logger.error(f"WooCommerce search error: {e}")
         return []
