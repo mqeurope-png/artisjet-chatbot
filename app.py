@@ -523,10 +523,9 @@ def chat():
             thread_id=thread_id,
             assistant_id=ASSISTANT_ID,
             tools=[
-                {"type": "file_search", "file_search": {"max_num_results": 5}},
+                {"type": "file_search"},
                 PRODUCT_SEARCH_TOOL
             ],
-            truncation_strategy={"type": "last_messages", "last_messages": 10},
             additional_instructions=(
                 "REGLA FUNDAMENTAL: Tu función principal es dar SOPORTE TÉCNICO. "
                 "Cuando el usuario pregunte cómo solucionar un problema, cómo hacer un mantenimiento, "
