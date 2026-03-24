@@ -6,8 +6,10 @@ sobre la Knowledge Base técnica de artisJet.
 """
 
 import os
+import re
 import time
 import json
+import requests as http_requests
 from flask import Flask, render_template, request, jsonify, session
 from openai import OpenAI
 
@@ -19,9 +21,95 @@ _openai_key = os.environ.get("OPENAI_API_KEY")
 client = OpenAI(api_key=_openai_key) if _openai_key else None
 ASSISTANT_ID = os.environ.get("OPENAI_ASSISTANT_ID")
 
+# WooCommerce API config — two shops depending on region
+WOOCOMMERCE_SHOPS = {
+    "es": {
+        "url": "https://boprint.net/wp-json/wc/v3",
+        "consumer_key": os.environ.get("WC_BOPRINT_KEY", "ck_b34980e265d3f6146ef21069bcb090d8612d0e14"),
+        "consumer_secret": os.environ.get("WC_BOPRINT_SECRET", "cs_10cb8c05251f8f2f7afdf29fa254d9306df40574"),
+        "shop_base": "https://boprint.net"
+    },
+    "eu": {
+        "url": "https://artisjet-printers.eu/wp-json/wc/v3",
+        "consumer_key": os.environ.get("WC_ARTISJET_KEY", "ck_f5b4ac4fa9027af31ca6762d39add95168bcc9b0"),
+        "consumer_secret": os.environ.get("WC_ARTISJET_SECRET", "cs_222cf463669a060c50c368a3505b6ef65aef3b10"),
+        "shop_base": "https://artisjet-printers.eu"
+    }
+}
+
 # Rate limiting simple (por IP)
 request_counts = {}
 MAX_REQUESTS_PER_HOUR = int(os.environ.get("MAX_REQUESTS_PER_HOUR", 30))
+
+
+def search_woocommerce(query, region="es", per_page=6):
+    """Search products on the appropriate WooCommerce shop."""
+    shop = WOOCOMMERCE_SHOPS.get(region, WOOCOMMERCE_SHOPS["es"])
+    try:
+        resp = http_requests.get(
+            f"{shop['url']}/products",
+            params={
+                "search": query,
+                "per_page": per_page,
+                "status": "publish",
+                "consumer_key": shop["consumer_key"],
+                "consumer_secret": shop["consumer_secret"],
+            },
+            timeout=10
+        )
+        resp.raise_for_status()
+        products = []
+        for p in resp.json():
+            img = p["images"][0]["src"] if p.get("images") else ""
+            # Use thumbnail size if available
+            if img and "srcset" not in str(p["images"][0]):
+                img_thumb = img.replace(".jpg", "-300x200.jpg").replace(".jpeg", "-300x200.jpeg").replace(".png", "-300x200.png")
+            else:
+                img_thumb = img
+            products.append({
+                "name": p.get("name", ""),
+                "sku": p.get("sku", ""),
+                "price": p.get("price", ""),
+                "currency": "€",
+                "url": p.get("permalink", ""),
+                "image": img_thumb,
+                "image_full": img,
+                "categories": [c["name"] for c in p.get("categories", [])],
+            })
+        return products
+    except Exception as e:
+        app.logger.error(f"WooCommerce search error: {e}")
+        return []
+
+
+# OpenAI function tool definition for product search
+PRODUCT_SEARCH_TOOL = {
+    "type": "function",
+    "function": {
+        "name": "search_products",
+        "description": (
+            "Busca productos, recambios, piezas o consumibles en la tienda online de Bomedia. "
+            "Usa esta función cuando el usuario pregunte por una pieza, repuesto, tinta, cabezal, "
+            "damper, placa, sensor, cable, o cualquier producto que pueda comprarse. "
+            "También cuando pregunte dónde comprar algo o cuánto cuesta."
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "Término de búsqueda del producto (ej: 'damper', 'cabezal xp600', 'tinta cyan', 'captop Proud')"
+                },
+                "region": {
+                    "type": "string",
+                    "enum": ["es", "eu"],
+                    "description": "Región del cliente: 'es' para España (boprint.net), 'eu' para resto de Europa (artisjet-printers.eu)"
+                }
+            },
+            "required": ["query", "region"]
+        }
+    }
+}
 
 
 def get_or_create_thread():
@@ -136,15 +224,24 @@ def chat():
             content=user_message
         )
 
-        # Ejecutar el asistente
+        # Get region from frontend (default: es)
+        user_region = data.get("region", "es")
+
+        # Ejecutar el asistente with product search tool
         run = client.beta.threads.runs.create(
             thread_id=thread_id,
-            assistant_id=ASSISTANT_ID
+            assistant_id=ASSISTANT_ID,
+            tools=[
+                {"type": "file_search"},
+                PRODUCT_SEARCH_TOOL
+            ]
         )
 
-        # Esperar respuesta (con timeout)
-        max_wait = 60  # segundos
+        # Esperar respuesta (con timeout) — handle function calls
+        max_wait = 90  # segundos (más tiempo por posible WooCommerce call)
         start = time.time()
+        products_found = []
+
         while time.time() - start < max_wait:
             run_status = client.beta.threads.runs.retrieve(
                 thread_id=thread_id,
@@ -153,6 +250,33 @@ def chat():
 
             if run_status.status == "completed":
                 break
+            elif run_status.status == "requires_action":
+                # Handle function calls (product search)
+                tool_outputs = []
+                for tool_call in run_status.required_action.submit_tool_outputs.tool_calls:
+                    if tool_call.function.name == "search_products":
+                        args = json.loads(tool_call.function.arguments)
+                        query = args.get("query", "")
+                        region = args.get("region", user_region)
+                        products = search_woocommerce(query, region)
+                        products_found.extend(products)
+
+                        # Return results to the assistant so it can reference them
+                        tool_outputs.append({
+                            "tool_call_id": tool_call.id,
+                            "output": json.dumps({
+                                "products": products,
+                                "shop": "boprint.net" if region == "es" else "artisjet-printers.eu",
+                                "total_results": len(products)
+                            }, ensure_ascii=False)
+                        })
+
+                if tool_outputs:
+                    client.beta.threads.runs.submit_tool_outputs(
+                        thread_id=thread_id,
+                        run_id=run.id,
+                        tool_outputs=tool_outputs
+                    )
             elif run_status.status in ("failed", "cancelled", "expired"):
                 return jsonify({
                     "error": f"Error del asistente: {run_status.status}"
@@ -181,16 +305,14 @@ def chat():
                         # Extraer anotaciones/fuentes
                         if block.text.annotations:
                             for ann in block.text.annotations:
-                                # Limpiar las referencias del texto
                                 if hasattr(ann, 'text'):
                                     text = text.replace(ann.text, "")
                                 if hasattr(ann, 'file_citation'):
                                     sources.append(ann.file_citation.file_id)
 
-                        # Clean up any remaining citation artifacts
-                        import re
-                        text = re.sub(r'【[^】]*】', '', text)  # Remove 【...】 citations
-                        text = re.sub(r'\s+([.,;:!?])', r'\1', text)  # Fix spacing before punctuation
+                        # Clean up citation artifacts
+                        text = re.sub(r'【[^】]*】', '', text)
+                        text = re.sub(r'\s+([.,;:!?])', r'\1', text)
                         response_text = text.strip()
                 break
 
@@ -201,11 +323,23 @@ def chat():
             "response": response_text,
             "sources": sources,
             "thread_id": thread_id,
-            "follow_ups": follow_ups
+            "follow_ups": follow_ups,
+            "products": products_found
         })
 
     except Exception as e:
         return jsonify({"error": f"Error: {str(e)}"}), 500
+
+
+@app.route("/api/products", methods=["GET"])
+def search_products_api():
+    """Direct product search endpoint."""
+    query = request.args.get("q", "").strip()
+    region = request.args.get("region", "es")
+    if not query:
+        return jsonify({"products": [], "error": "No search query"}), 400
+    products = search_woocommerce(query, region, per_page=6)
+    return jsonify({"products": products, "query": query, "region": region})
 
 
 @app.route("/api/new-chat", methods=["POST"])
