@@ -246,10 +246,11 @@ PRODUCT_SEARCH_TOOL = {
     "function": {
         "name": "search_products",
         "description": (
-            "Busca productos, recambios, piezas o consumibles en la tienda online de Bomedia. "
-            "Usa esta función cuando el usuario pregunte por una pieza, repuesto, tinta, cabezal, "
-            "damper, placa, sensor, cable, o cualquier producto que pueda comprarse. "
-            "También cuando pregunte dónde comprar algo o cuánto cuesta. "
+            "Busca productos, recambios o piezas en la tienda online de Bomedia. "
+            "Usa esta función SOLO cuando el usuario PIDA EXPLÍCITAMENTE comprar, buscar o ver "
+            "un producto, repuesto o pieza. También cuando pregunte dónde comprar o cuánto cuesta algo. "
+            "NO la uses si el usuario solo pregunta cómo solucionar un problema técnico o cómo hacer un mantenimiento. "
+            "En esos casos, responde con la solución técnica basada en la Knowledge Base. "
             "IMPORTANTE: usa queries CORTAS de 1-2 palabras (ej: 'damper', 'captop', 'tinta'). "
             "Nunca incluyas la marca ni el modelo en la query — usa el parámetro 'model' para eso."
         ),
@@ -463,7 +464,20 @@ def chat():
             tools=[
                 {"type": "file_search"},
                 PRODUCT_SEARCH_TOOL
-            ]
+            ],
+            additional_instructions=(
+                "REGLA FUNDAMENTAL: Tu función principal es dar SOPORTE TÉCNICO. "
+                "Cuando el usuario pregunte cómo solucionar un problema, cómo hacer un mantenimiento, "
+                "o qué causa un error, SIEMPRE responde primero con la explicación técnica completa "
+                "basada en los documentos PDF y vídeos de la Knowledge Base. "
+                "Busca PRIMERO en la Knowledge Base (PDFs, vídeos, manuales). "
+                "Si encuentras un PDF o vídeo relevante, inclúyelo como referencia. "
+                "NO llames a search_products para preguntas técnicas — el sistema añade productos "
+                "sugeridos automáticamente si es relevante. Solo usa search_products cuando el usuario "
+                "PIDA EXPLÍCITAMENTE comprar, buscar o ver un producto en la tienda. "
+                "Cuando el usuario diga su modelo de impresora respondiendo a tu pregunta anterior, "
+                "usa esa información para DAR LA RESPUESTA TÉCNICA que le debías, no para buscar productos."
+            )
         )
 
         # Esperar respuesta (con timeout) — handle function calls
