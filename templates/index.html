@@ -439,6 +439,17 @@
             line-height: 1.4;
             margin-bottom: 8px;
         }
+        .products-header .products-shop-link {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 8px;
+        }
+        .products-header .products-shop-link:hover {
+            text-decoration: underline;
+        }
 
         /* Region selector */
         .region-selector {
@@ -605,12 +616,7 @@
             <div class="welcome-icon">🖨️</div>
             <h2>Soporte Técnico Bomedia</h2>
             <p>Pregunta sobre instalación, mantenimiento, errores, impresión o software de tu impresora UV (artisJet o MBO).</p>
-            <div class="suggestions">
-                <div class="suggestion" onclick="sendSuggestion(this)">Mi impresora muestra error SX001, ¿cómo lo soluciono?</div>
-                <div class="suggestion" onclick="sendSuggestion(this)">¿Cuál es el mantenimiento semanal recomendado?</div>
-                <div class="suggestion" onclick="sendSuggestion(this)">El resultado de impresión tiene líneas, ¿qué puede ser?</div>
-                <div class="suggestion" onclick="sendSuggestion(this)">¿Cómo cambio los dampers en una Proud?</div>
-            </div>
+            <div class="suggestions" id="initialSuggestions"></div>
         </div>
     </div>
 
@@ -659,6 +665,63 @@
             de: { title: 'Bomedia Technischer Support', subtitle: 'Fragen zu Installation, Wartung, Fehlern, Druck oder Software Ihres UV-Druckers (artisJet oder MBO).', placeholder: 'Schreiben Sie Ihre technische Frage...', newChat: '+ Neue Anfrage', footer: 'Bomedia Technischer Support — Die Antworten basieren auf offizieller artisJet- und MBO-Dokumentation' }
         };
 
+        const starterQuestions = {
+            es: [
+                'Mi impresora muestra error SX001, ¿cómo lo soluciono?',
+                '¿Cuál es el mantenimiento semanal recomendado?',
+                'El resultado de impresión tiene líneas, ¿qué puede ser?',
+                '¿Cómo cambio los dampers en una Proud?',
+                'Tengo una MBO 4060, ¿cómo ajusto la impresión bidireccional?',
+                '¿Cada cuánto hay que cambiar el captop?',
+                '¿Qué tinta debo usar para imprimir sobre vidrio?',
+                '¿Cómo hago una purga de tintas en la 5000U?',
+                '¿Cómo calibro la altura del cabezal?',
+                'Mi impresora no enciende la lámpara UV, ¿qué reviso?'
+            ],
+            en: [
+                'My printer shows error SX001, how do I fix it?',
+                'What is the recommended weekly maintenance?',
+                'Print results have lines, what could it be?',
+                'How do I change the dampers on a Proud?',
+                'I have an MBO 4060, how do I adjust bidirectional printing?',
+                'How often should the captop be replaced?',
+                'Which ink should I use to print on glass?',
+                'How do I purge inks on the 5000U?',
+                'How do I calibrate the printhead height?',
+                'My printer UV lamp won\'t turn on, what should I check?'
+            ],
+            fr: [
+                'Mon imprimante affiche l\'erreur SX001, comment la résoudre ?',
+                'Quel est l\'entretien hebdomadaire recommandé ?',
+                'Le résultat d\'impression a des lignes, quelle en est la cause ?',
+                'Comment changer les dampers sur une Proud ?',
+                'J\'ai une MBO 4060, comment régler l\'impression bidirectionnelle ?',
+                'À quelle fréquence faut-il changer le captop ?',
+                'Quelle encre utiliser pour imprimer sur du verre ?',
+                'Comment faire une purge d\'encre sur la 5000U ?',
+                'Comment calibrer la hauteur de la tête d\'impression ?',
+                'La lampe UV de mon imprimante ne s\'allume pas, que vérifier ?'
+            ],
+            de: [
+                'Mein Drucker zeigt Fehler SX001, wie behebe ich das?',
+                'Was ist die empfohlene wöchentliche Wartung?',
+                'Das Druckergebnis hat Linien, woran kann es liegen?',
+                'Wie wechsle ich die Damper an einer Proud?',
+                'Ich habe einen MBO 4060, wie stelle ich den bidirektionalen Druck ein?',
+                'Wie oft muss der Captop gewechselt werden?',
+                'Welche Tinte sollte ich für Glas verwenden?',
+                'Wie mache ich eine Tintenspülung bei der 5000U?',
+                'Wie kalibriere ich die Druckkopfhöhe?',
+                'Die UV-Lampe meines Druckers geht nicht an, was soll ich prüfen?'
+            ]
+        };
+
+        function getRandomQuestions(lang, count) {
+            const pool = starterQuestions[lang] || starterQuestions['es'];
+            const shuffled = [...pool].sort(() => Math.random() - 0.5);
+            return shuffled.slice(0, count);
+        }
+
         function setLang(lang, btn) {
             selectedLang = lang;
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -673,6 +736,12 @@
             if (welcomeEl) {
                 welcomeEl.querySelector('h2').textContent = labels.title;
                 welcomeEl.querySelector('p').textContent = labels.subtitle;
+                // Update starter questions in the current language
+                const suggestions = welcomeEl.querySelectorAll('.suggestion');
+                const questions = getRandomQuestions(lang, 4);
+                suggestions.forEach((el, i) => {
+                    if (questions[i]) el.textContent = questions[i];
+                });
             }
         }
 
@@ -713,11 +782,21 @@
 
                 // Add product cards if products were found
                 if (products && products.length > 0) {
+                    const shopUrl = selectedRegion === 'es' ? 'https://boprint.net/shop/' : 'https://artisjet-printers.eu/shop/';
+                    const shopName = selectedRegion === 'es' ? 'boprint.net' : 'artisjet-printers.eu';
+                    const prodLabels = {
+                        es: { title: 'Productos sugeridos', disclaimer: 'Estos productos pueden variar según el modelo de tu impresora. Si no estás seguro, indícame tu modelo exacto para confirmar compatibilidad.', shopLink: 'Ver toda la tienda' },
+                        en: { title: 'Suggested products', disclaimer: 'These products may vary depending on your printer model. If you are not sure, tell me your exact model to confirm compatibility.', shopLink: 'Browse full shop' },
+                        fr: { title: 'Produits suggérés', disclaimer: 'Ces produits peuvent varier selon le modèle de votre imprimante. En cas de doute, indiquez-moi votre modèle exact pour confirmer la compatibilité.', shopLink: 'Voir toute la boutique' },
+                        de: { title: 'Empfohlene Produkte', disclaimer: 'Diese Produkte können je nach Druckermodell variieren. Wenn Sie unsicher sind, nennen Sie mir Ihr genaues Modell zur Bestätigung der Kompatibilität.', shopLink: 'Ganzen Shop ansehen' }
+                    };
+                    const pl = prodLabels[selectedLang] || prodLabels['es'];
                     const header = document.createElement('div');
                     header.className = 'products-header';
                     header.innerHTML = `
-                        <div class="products-title">Productos sugeridos</div>
-                        <div class="products-disclaimer">Estos productos pueden variar seg\u00fan el modelo de tu impresora. Si no est\u00e1s seguro, ind\u00edcame tu modelo exacto para confirmar compatibilidad.</div>
+                        <div class="products-title">${pl.title}</div>
+                        <div class="products-disclaimer">${pl.disclaimer}</div>
+                        <a class="products-shop-link" href="${shopUrl}" target="_blank" rel="noopener">🛒 ${pl.shopLink} (${shopName}) →</a>
                     `;
                     content.appendChild(header);
 
@@ -944,20 +1023,29 @@
             } catch (e) {}
 
             const labels = langLabels[selectedLang];
+            const questions = getRandomQuestions(selectedLang, 4);
             chatContainer.innerHTML = `
                 <div class="welcome" id="welcomeScreen">
                     <div class="welcome-icon">🖨️</div>
                     <h2>${labels.title}</h2>
                     <p>${labels.subtitle}</p>
                     <div class="suggestions">
-                        <div class="suggestion" onclick="sendSuggestion(this)">Mi impresora muestra error SX001, ¿cómo lo soluciono?</div>
-                        <div class="suggestion" onclick="sendSuggestion(this)">¿Cuál es el mantenimiento semanal recomendado?</div>
-                        <div class="suggestion" onclick="sendSuggestion(this)">El resultado de impresión tiene líneas, ¿qué puede ser?</div>
-                        <div class="suggestion" onclick="sendSuggestion(this)">Tengo una MBO 4060, ¿cómo ajusto la impresión bidireccional?</div>
+                        ${questions.map(q => `<div class="suggestion" onclick="sendSuggestion(this)">${q}</div>`).join('')}
                     </div>
                 </div>`;
             messageInput.focus();
         }
+
+        // Populate initial starter questions
+        (function() {
+            const container = document.getElementById('initialSuggestions');
+            if (container) {
+                const questions = getRandomQuestions(selectedLang, 4);
+                container.innerHTML = questions.map(q =>
+                    `<div class="suggestion" onclick="sendSuggestion(this)">${q}</div>`
+                ).join('');
+            }
+        })();
 
         // Focus input on load
         messageInput.focus();
