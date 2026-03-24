@@ -88,14 +88,13 @@ def _format_products(raw_products):
             continue
         seen_ids.add(pid)
         img = p["images"][0]["src"] if p.get("images") else ""
-        img_thumb = img.replace(".jpg", "-300x300.jpg").replace(".jpeg", "-300x300.jpeg").replace(".png", "-300x300.png") if img else ""
         products.append({
             "name": p.get("name", ""),
             "sku": p.get("sku", ""),
             "price": p.get("price", ""),
             "currency": "€",
             "url": p.get("permalink", ""),
-            "image": img_thumb,
+            "image": img,
             "image_full": img,
             "categories": [c["name"] for c in p.get("categories", [])],
         })
