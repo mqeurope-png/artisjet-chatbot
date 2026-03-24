@@ -518,13 +518,15 @@ def chat():
         user_region = data.get("region", "es")
 
         # Ejecutar el asistente with product search tool
+        # Limit file_search to 5 results (default 20) to reduce input tokens ~60%
         run = client.beta.threads.runs.create(
             thread_id=thread_id,
             assistant_id=ASSISTANT_ID,
             tools=[
-                {"type": "file_search"},
+                {"type": "file_search", "file_search": {"max_num_results": 5}},
                 PRODUCT_SEARCH_TOOL
             ],
+            truncation_strategy={"type": "last_messages", "last_messages": 10},
             additional_instructions=(
                 "REGLA FUNDAMENTAL: Tu función principal es dar SOPORTE TÉCNICO. "
                 "Cuando el usuario pregunte cómo solucionar un problema, cómo hacer un mantenimiento, "
