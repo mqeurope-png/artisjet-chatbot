@@ -517,36 +517,35 @@ def chat():
         # Get region from frontend (default: es)
         user_region = data.get("region", "es")
 
-        # Ejecutar el asistente with product search tool
-        # Limit file_search to 5 results (default 20) to reduce input tokens ~60%
+        # Ejecutar el asistente — solo file_search (RAG), sin product search
         run = client.beta.threads.runs.create(
             thread_id=thread_id,
             assistant_id=ASSISTANT_ID,
             tools=[
-                {"type": "file_search"},
-                PRODUCT_SEARCH_TOOL
+                {"type": "file_search"}
             ],
             additional_instructions=(
-                "REGLA FUNDAMENTAL: Tu función principal es dar SOPORTE TÉCNICO. "
-                "Cuando el usuario pregunte cómo solucionar un problema, cómo hacer un mantenimiento, "
-                "o qué causa un error, SIEMPRE responde primero con la explicación técnica completa "
-                "basada en los documentos de la Knowledge Base. "
-                "Busca en la Knowledge Base (PDFs, manuales) para dar respuestas precisas. "
-                "Si encuentras un documento relevante con URL real, inclúyelo como referencia. "
-                "IMPORTANTE: NUNCA inventes URLs ni enlaces a vídeos o documentos que no hayas encontrado "
-                "realmente en la Knowledge Base. Si no encuentras un recurso específico, simplemente no lo menciones. "
-                "NO llames a search_products para preguntas técnicas — el sistema añade productos "
-                "sugeridos automáticamente si es relevante. Solo usa search_products cuando el usuario "
-                "PIDA EXPLÍCITAMENTE comprar, buscar o ver un producto en la tienda. "
-                "Cuando el usuario diga su modelo de impresora respondiendo a tu pregunta anterior, "
-                "usa esa información para DAR LA RESPUESTA TÉCNICA que le debías, no para buscar productos."
+                "REGLAS DE RESPUESTA:\n"
+                "1. BASA TUS RESPUESTAS EN LA KNOWLEDGE BASE. Busca SIEMPRE en los documentos antes de responder. "
+                "Si no encuentras info específica, di que no tienes documentación para ese caso concreto.\n"
+                "2. SÉ BREVE Y DIRECTO. Máximo 5-8 líneas para respuestas simples. "
+                "No des pasos obvios como 'apaga la impresora' o 'ponte guantes'. "
+                "Ve al grano con la información técnica útil.\n"
+                "3. VÍDEOS: Si encuentras un vídeo en la KB, compártelo con su enlace. "
+                "Si el vídeo es de otro modelo pero el procedimiento es similar, compártelo igualmente indicándolo. "
+                "NUNCA inventes URLs — solo comparte enlaces que encuentres realmente en los documentos.\n"
+                "4. NO repitas 'contacta con soporte de Bomedia' al final de cada respuesta. "
+                "Solo menciónalo si el problema es realmente complejo o requiere intervención física.\n"
+                "5. NO menciones productos ni tiendas. Tu función es dar soporte técnico, no vender.\n"
+                "6. Cuando el usuario indique su modelo, responde directamente con la solución técnica.\n"
+                "7. No inventes información técnica que no esté en la Knowledge Base. "
+                "Es mejor una respuesta corta y precisa que una larga y genérica."
             )
         )
 
-        # Esperar respuesta (con timeout) — handle function calls
-        max_wait = 90  # segundos (más tiempo por posible WooCommerce call)
+        # Esperar respuesta (con timeout)
+        max_wait = 90
         start = time.time()
-        products_found = []
         token_info = None
 
         while time.time() - start < max_wait:
@@ -556,39 +555,8 @@ def chat():
             )
 
             if run_status.status == "completed":
-                # Track token usage
                 token_info = track_tokens(run_status)
                 break
-            elif run_status.status == "requires_action":
-                # Handle function calls (product search)
-                tool_outputs = []
-                for tool_call in run_status.required_action.submit_tool_outputs.tool_calls:
-                    if tool_call.function.name == "search_products":
-                        args = json.loads(tool_call.function.arguments)
-                        query = args.get("query", "")
-                        region = args.get("region", user_region)
-                        model = args.get("model", None)
-                        app.logger.info(f"[PRODUCT SEARCH] query='{query}' region='{region}' model='{model}'")
-                        products = search_woocommerce(query, region, model=model)
-                        app.logger.info(f"[PRODUCT SEARCH] Found {len(products)} products")
-                        products_found.extend(products)
-
-                        # Return results to the assistant so it can reference them
-                        tool_outputs.append({
-                            "tool_call_id": tool_call.id,
-                            "output": json.dumps({
-                                "products": products,
-                                "shop": "boprint.net" if region == "es" else "artisjet-printers.eu",
-                                "total_results": len(products)
-                            }, ensure_ascii=False)
-                        })
-
-                if tool_outputs:
-                    client.beta.threads.runs.submit_tool_outputs(
-                        thread_id=thread_id,
-                        run_id=run.id,
-                        tool_outputs=tool_outputs
-                    )
             elif run_status.status in ("failed", "cancelled", "expired"):
                 return jsonify({
                     "error": f"Error del asistente: {run_status.status}"
@@ -628,25 +596,6 @@ def chat():
                         response_text = text.strip()
                 break
 
-        # AUTO-SEARCH: If assistant didn't search for products but the response
-        # mentions spare parts, search automatically as suggestions
-        if not products_found:
-            detected_parts = detect_parts_in_text(response_text, user_message)
-            if detected_parts:
-                detected_model = detect_model_in_text(response_text, user_message)
-                app.logger.info(f"[AUTO-SEARCH] Parts detected: {detected_parts}, model: {detected_model}")
-                for part_query in detected_parts:
-                    auto_products = search_woocommerce(part_query, user_region, model=detected_model)
-                    products_found.extend(auto_products)
-                # Deduplicate by URL
-                seen_urls = set()
-                unique_products = []
-                for p in products_found:
-                    if p['url'] not in seen_urls:
-                        seen_urls.add(p['url'])
-                        unique_products.append(p)
-                products_found = unique_products[:4]
-
         # Generar sugerencias de seguimiento basadas en el contexto
         follow_ups = generate_follow_ups(thread_id, user_message, response_text)
 
@@ -654,8 +603,7 @@ def chat():
             "response": response_text,
             "sources": sources,
             "thread_id": thread_id,
-            "follow_ups": follow_ups,
-            "products": products_found
+            "follow_ups": follow_ups
         }
         if token_info:
             result["tokens"] = token_info
